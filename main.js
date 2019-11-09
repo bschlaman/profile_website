@@ -4,8 +4,10 @@ window.onload=function(){
 //    navigationSection();
 
     setOpenNewTab();
+    scrollShit();
 }
 
+// Forces all links to open to a new tab except for the navigation anchors
 var setOpenNewTab = function(){
     let navAnchors = document.querySelectorAll("#navbar a");
     for (let i = 0 ; i < navAnchors.length ; i++){
@@ -17,8 +19,8 @@ var setOpenNewTab = function(){
     }
 }
 
+// Adds onlick function to all nav anchors to highlight them when clicked.  Will probably disable this in favor of the scroll activation method
 var navHighlight = function(){
-
     let navAnchors = document.querySelectorAll("#main-menu ul li a");
     for (let i = 0 ; i < navAnchors.length ; i++){
         navAnchors[i].onclick = function() {
@@ -29,26 +31,6 @@ var navHighlight = function(){
             this.parentElement.classList.add('active')
         }
     }
-    //$('#text-center a:not([class="external"])').click(function(event){
-    //    var section = $(this).data('nav-section'),
-    //        navbar = $('#navbar');
-    //        if ( $('[data-section="' + section + '"]').length ) {
-    //            $('html, body').animate({
-    //                scrollTop: $('[data-section="' + section + '"]').offset().top - 55
-    //            }, 500);
-    //       }
-
-    //    if ( navbar.is(':visible')) {
-    //        navbar.removeClass('in');
-    //        navbar.attr('aria-expanded', 'false');
-    //        $('.js-colorlib-nav-toggle').removeClass('active');
-    //    }
-
-    //    event.preventDefault();
-    //    return false;
-    //});
-
-
 }
 
 
@@ -62,6 +44,18 @@ var navActive = function(section) {
 
 }
 
+// Finds which element is active near the middle of the screen
+window.addEventListener("scroll", () => {
+    let sections = document.querySelectorAll("section");
+    let elem = null;
+    let scrollOffset = 0.5;//determines how far up the the page the element needs to be before triggering the function
+    for (let i = 0 ; i < sections.length ; i++){
+        let triggerLine = sections[i].getBoundingClientRect().top + window.scrollY - (window.innerHeight * scrollOffset);
+        if (window.pageYOffset > triggerLine && window.pageYOffset < triggerLine + sections[i].clientHeight){
+            console.log(sections[i].id);
+        }
+    }
+});
 
 var navigationSection = function() {
 
@@ -84,4 +78,56 @@ var navigationSection = function() {
         offset: function() { return -$(this.element).height() + 155; }
     });
 };
+
+
+var scrollShit = function() {
+    //var element_position = $('#experience').offset().top;
+    //var element_position = document.getElementById("music").getBoundingClientRect().top;
+    var mus = document.getElementById("blog");
+    var mustop = mus.getBoundingClientRect().top;
+    var musrel = mustop + window.scrollY;
+    var element_position = musrel;
+    //var topPos = element.getBoundingClientRect().top + window.scrollY;
+    //
+    //var viewTop = viewportOffset.top;
+    // var mus = document.getElementById("blog");
+    // var mustop = mus.getBoundingClientRect().top;
+    // var musrel = mustop + window.scrollY;
+    // var element_position = musrel;
+    // let scrollOffset = 0.5;//determines how far up the the page the element needs to be before triggering the function
+    // var activation_point = element_position - (window.innerHeight * scrollOffset);
+    // var max_scroll_height = document.body.clientHeight - screen_height - 5;//-5 for a little bit of buffer
+    // var y_scroll_pos = window.pageYOffset;
+
+    // var element_in_view = y_scroll_pos > activation_point && y_scroll_pos < activation_point+mus.clientHeight;
+    // var has_reached_bottom_of_page = max_scroll_height <= y_scroll_pos && !element_in_view;
+
+    // if(element_in_view || has_reached_bottom_of_page) {
+    //     console.log('asdf');
+    // }
+    var screen_height = window.innerHeight;
+    var activation_offset = 0.5;//determines how far up the the page the element needs to be before triggering the function
+    var activation_point = element_position - (screen_height * activation_offset);
+    var max_scroll_height = document.body.clientHeight - screen_height - 5;//-5 for a little bit of buffer
+}
+//Does something when user scrolls to it OR
+//Does it when user has reached the bottom of the page and hasn't triggered the function yet
+    //$('#text-center a:not([class="external"])').click(function(event){
+    //    var section = $(this).data('nav-section'),
+    //        navbar = $('#navbar');
+    //        if ( $('[data-section="' + section + '"]').length ) {
+    //            $('html, body').animate({
+    //                scrollTop: $('[data-section="' + section + '"]').offset().top - 55
+    //            }, 500);
+    //       }
+
+    //    if ( navbar.is(':visible')) {
+    //        navbar.removeClass('in');
+    //        navbar.attr('aria-expanded', 'false');
+    //        $('.js-colorlib-nav-toggle').removeClass('active');
+    //    }
+
+    //    event.preventDefault();
+    //    return false;
+    //});
 
