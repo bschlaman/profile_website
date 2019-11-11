@@ -116,8 +116,8 @@ div {
     flex-wrap: wrap;
 }
 .skillcard {
-    height: 250px;
-    width: 250px;
+    height: 260px;
+    width: 260px;
     margin: 20px;
     perspective: 1000px;
     outline: 0;
