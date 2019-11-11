@@ -23,13 +23,12 @@ var setOpenNewTab = function(){
 var navHighlight = function(){
     let navAnchors = document.querySelectorAll("#main-menu ul li a");
     for (let i = 0 ; i < navAnchors.length ; i++){
-        navAnchors[i].onclick = function() {
-            let items = navAnchors;
-            for (let i = 0 ; i < items.length ; i++){
-                items[i].parentElement.classList.remove('active');
+        navAnchors[i].onclick = function(){
+            for (let i = 0 ; i < navAnchors.length ; i++){
+                navAnchors[i].parentElement.classList.remove('active');
             }
-            this.parentElement.classList.add('active')
-        }
+            this.parentElement.classList.add('active');
+        };
     }
 }
 
@@ -44,7 +43,7 @@ var navActive = function(section) {
 
 }
 
-// Finds which element is active near the middle of the screen
+// Finds which element is active near the middle of the screen and sets corresponding li to active
 window.addEventListener("scroll", () => {
     let sections = document.querySelectorAll("section");
     let elem = null;
@@ -53,6 +52,12 @@ window.addEventListener("scroll", () => {
         let triggerLine = sections[i].getBoundingClientRect().top + window.scrollY - (window.innerHeight * scrollOffset);
         if (window.pageYOffset > triggerLine && window.pageYOffset < triggerLine + sections[i].clientHeight){
             console.log(sections[i].id);
+            let navAnchors = document.querySelectorAll("#main-menu ul li a");
+            for (let j = 0 ; j < navAnchors.length ; j++){
+                if (sections[i].id == navAnchors[j].innerHTML.toLowerCase()){
+                    navAnchors[j].parentElement.classList.add('active');
+                } else { navAnchors[j].parentElement.classList.remove('active'); }
+            }
         }
     }
 });

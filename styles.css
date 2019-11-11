@@ -50,6 +50,9 @@ div {
     color: #000;
 }
 
+#side {
+    position: fixed;
+}
 #main-menu {
     width: 100%;
 }
@@ -161,7 +164,7 @@ div {
     align-items: center;
 }
 #langs p{
-    margin: 8px;
+    margin: 6px;
 }
 
 
