@@ -4,7 +4,6 @@ window.onload=function(){
 //    navigationSection();
 
     setOpenNewTab();
-    scrollShit();
 }
 
 // Forces all links to open to a new tab except for the navigation anchors
@@ -23,12 +22,14 @@ var setOpenNewTab = function(){
 var navHighlight = function(){
     let navAnchors = document.querySelectorAll("#main-menu ul li a");
     for (let i = 0 ; i < navAnchors.length ; i++){
-        navAnchors[i].onclick = function(){
-            for (let i = 0 ; i < navAnchors.length ; i++){
-                navAnchors[i].parentElement.classList.remove('active');
-            }
-            this.parentElement.classList.add('active');
-        };
+        navAnchors[i].addEventListener("click", function() {
+            document.getElementById(this.innerHTML.toLowerCase()).scrollIntoView({ behavior: 'smooth' });
+            //smoothScroll(document.getElementById(this.innerHTML.toLowerCase()));
+            // for (let i = 0 ; i < navAnchors.length ; i++){
+            //     navAnchors[i].parentElement.classList.remove('active');
+            // }
+            // this.parentElement.classList.add('active');
+        });
     }
 }
 
@@ -51,7 +52,6 @@ window.addEventListener("scroll", () => {
     for (let i = 0 ; i < sections.length ; i++){
         let triggerLine = sections[i].getBoundingClientRect().top + window.scrollY - (window.innerHeight * scrollOffset);
         if (window.pageYOffset > triggerLine && window.pageYOffset < triggerLine + sections[i].clientHeight){
-            console.log(sections[i].id);
             let navAnchors = document.querySelectorAll("#main-menu ul li a");
             for (let j = 0 ; j < navAnchors.length ; j++){
                 if (sections[i].id == navAnchors[j].innerHTML.toLowerCase()){
@@ -61,6 +61,40 @@ window.addEventListener("scroll", () => {
         }
     }
 });
+
+var smoothScroll = function(target) {
+    var MIN_PIXELS_PER_STEP = 16;
+    var MAX_SCROLL_STEPS = 30;
+    //var target = document.getElementById(elementId);
+    var scrollContainer = target;
+    do {
+        scrollContainer = scrollContainer.parentNode;
+        if (!scrollContainer) return;
+        scrollContainer.scrollTop += 1;
+    } while (scrollContainer.scrollTop == 0);
+
+    var targetY = 0;
+    do {
+        if (target == scrollContainer) break;
+        targetY += target.offsetTop;
+    } while (target = target.offsetParent);
+
+    var pixelsPerStep = Math.max(MIN_PIXELS_PER_STEP,
+                                 (targetY - scrollContainer.scrollTop) / MAX_SCROLL_STEPS);
+
+    var stepFunc = function() {
+        scrollContainer.scrollTop =
+            Math.min(targetY, pixelsPerStep + scrollContainer.scrollTop);
+
+        if (scrollContainer.scrollTop >= targetY) {
+            return;
+        }
+
+        window.requestAnimationFrame(stepFunc);
+    };
+
+    window.requestAnimationFrame(stepFunc);
+}
 
 var navigationSection = function() {
 

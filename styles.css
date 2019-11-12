@@ -73,7 +73,7 @@ div {
     position: relative;
     padding: 10px 0;
     color: rgba(0, 0, 0, 0.7);
-/*     transition: 0.3s; */
+    transition: 0.3s;
 }
 #main-menu ul li a:hover {
     color: black;
