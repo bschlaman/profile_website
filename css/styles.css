@@ -1,0 +1,330 @@
+html {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+body {
+    font-family: "Quicksand", Arial, sans-serif;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* DIVS */
+#wrapper {
+    overflow: hidden;
+}
+div {
+    outline: 2px solid black;
+}
+
+#side {
+    float: left;
+    width: 300px;
+}
+#main {
+    float: right;
+    width: calc(100% - 300px);
+}
+
+#headshot {
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#my-name {
+    display: block;
+    width: 100%;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: .5em;
+}
+#my-title {
+    text-transform: uppercase;
+}
+#my-name a {
+    display: block;
+    color: #000;
+}
+
+/* NAVBAR */
+#side {
+    position: fixed;
+}
+#main-menu {
+    width: 100%;
+}
+#main-menu ul {
+    width: 100%;
+    padding: 0;
+}
+#main-menu ul li {
+    margin: 0 0 10px 0;
+    padding: 0;
+    list-style-type: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 500;
+}
+#main-menu ul li a {
+    position: relative;
+    padding: 10px 0;
+    color: rgba(0, 0, 0, 0.7);
+    transition: 0.3s;
+}
+#main-menu ul li a:hover {
+    color: black;
+}
+#main-menu ul li.active a {
+    color: #2c98f0;
+}
+#main-menu ul li a::after {
+    content: "";
+    position: absolute;
+    bottom: 7px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #2c98f0;
+    transform: scaleX(0);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#main-menu ul li a:hover::after {
+    transform: scaleX(1);
+}
+#main-menu ul li.active a::after {
+    transform: scaleX(1);
+}
+
+/* MAIN SECTION */
+#hero {
+    outline: 2px solid lightblue;
+}
+.main-section {
+    padding-top: 4em;
+    padding-bottom: 9em;
+    outline: 2px solid green;
+    clear: both;
+}
+#main .section-content {
+    outline: 2px solid red;
+}
+
+/* SKILLCARDS */
+#skills-div {
+    display: flex;
+    flex-wrap: wrap;
+}
+.skillcard {
+    height: 260px;
+    width: 260px;
+    margin: 20px;
+    perspective: 1000px;
+    outline: 0;
+}
+.sc-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    box-shadow: 0 6px 6px 0 rgba(0,0,0,0.8);
+}
+.sc-front, .sc-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #6666ff;
+    backface-visibility: hidden;
+}
+.sc-front {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.sc-back {
+    transform: rotateY(180deg);
+}
+.skillcard:hover .sc-inner {
+    transform: rotateY(180deg);
+}
+.skillcard h3 {
+    color: inherit;
+}
+#coding .sc-back{
+    text-align: center;
+}
+#langs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+#langs p{
+    margin: 6px;
+}
+
+/* GRID */
+[class^="icon-"] {
+  font-family: 'icomoon' !important;
+  font-style: normal;
+  text-transform: none;
+}
+.tile-wrapper {
+    position: relative;
+    margin: auto;
+    text-align: center;
+    background: #eee;
+    max-width: 1000px;
+    width: auto;
+}
+.tile-wrapper .tile {
+    position: relative;
+    margin-top: 100px;
+    border-bottom: 2px solid #2c98f0;
+}
+.tile-wrapper .tile.color-2 {
+  border-bottom: 2px solid #ec5453;
+}
+.tile-wrapper .tile.color-2 .icon2 i {
+    color: #ec5453;
+}
+.tile-wrapper .tile.color-3 {
+  border-bottom: 2px solid #f9bf3f;
+}
+.tile-wrapper .tile.color-3 .icon2 i {
+    color: #f9bf3f;
+}
+.tile-wrapper .tile.color-4 {
+  border-bottom: 2px solid #a84cb8;
+}
+.tile-wrapper .tile.color-4 .icon2 i {
+    color: #a84cb8;
+}
+.tile-wrapper .tile.color-5 {
+  border-bottom: 2px solid #2fa499;
+}
+.tile-wrapper .tile.color-6 {
+  border-bottom: 2px solid #4054b2;
+}
+.tile-wrapper .tile .icon {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    right: 0;
+    width: 100px;
+    height: 50px;
+    display: table;
+    background: #2c98f0;
+}
+.tile-wrapper .tile .icon:before, .tile-wrapper .tile .icon:after {
+    position: absolute;
+    left: 0;
+    content: '';
+}
+.tile-wrapper .tile .icon:before {
+    top: -30px;
+    border-style: solid;
+    border-width: 0 50px 30px 50px;
+    border-color: transparent transparent #2c98f0 transparent;
+}
+.tile-wrapper .tile .icon:after {
+    bottom: -30px;
+    border-style: solid;
+    border-width: 30px 50px 0 50px;
+    border-color: #2c98f0 transparent transparent transparent;
+}
+.tile-wrapper .tile .icon i {
+    font-size: 30px;
+    color: #fff;
+    z-index: 1;
+    display: table-cell;
+    vertical-align: middle;
+}
+.tile-wrapper .tile .desc {
+    margin-top: 60px;
+    line-height: 30px;
+}
+.tile-wrapper .tile .desc h3 {
+    text-transform: uppercase;
+}
+.tile-wrapper .tile.color-2 .icon {
+    background: #ec5453;
+}
+.tile-wrapper .tile.color-2 .icon:before {
+    border-color: transparent transparent #ec5453 transparent;
+}
+.tile-wrapper .tile.color-2 .icon:after {
+    border-color: #ec5453 transparent transparent transparent;
+}
+.tile-wrapper .tile.color-3 .icon {
+    background: #f9bf3f;
+}
+.tile-wrapper .tile.color-3 .icon:before {
+    border-color: transparent transparent #f9bf3f transparent;
+}
+.tile-wrapper .tile.color-3 .icon:after {
+    border-color: #f9bf3f transparent transparent transparent;
+}
+.tile-wrapper .tile.color-4 .icon {
+    background: #a84cb8;
+}
+.tile-wrapper .tile.color-4 .icon:before {
+    border-color: transparent transparent #a84cb8 transparent;
+}
+.tile-wrapper .tile.color-4 .icon:after {
+    border-color: #a84cb8 transparent transparent transparent;
+}
+.tile-wrapper .tile.color-5 .icon {
+    background: #2fa499;
+}
+.tile-wrapper .tile.color-5 .icon:before {
+    border-color: transparent transparent #2fa499 transparent;
+}
+.tile-wrapper .tile.color-5 .icon:after {
+    border-color: #2fa499 transparent transparent transparent;
+}
+.tile-wrapper .tile.color-6 .icon {
+    background: #4054b2;
+}
+.tile-wrapper .tile.color-6 .icon:before {
+    border-color: transparent transparent #4054b2 transparent;
+}
+.tile-wrapper .tile.color-6 .icon:after {
+    border-color: #4054b2 transparent transparent transparent;
+}
+
+/*  HEADERS  */
+h1, h2, h3, h4 {
+    color: #000;
+}
+
+/*  LINKS  */
+a {
+    text-decoration: none;
+    /* color: inherit; */
+    color: blue;
+}
+
+/* TABLES */
+table {
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid black;
+}
+
+/*  GENERAL  */
+.text-center {
+    text-align: center;
+}
+::selection {
+  color: #fff;
+  background: #8c98f0;
+}

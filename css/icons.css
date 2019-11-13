@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'icomoon';
+  src: url('../fonts/icomoon/icomoon.ttf?6py85u') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-bulb:before {
+  content: "\e90e";
+}
+.icon-data:before {
+  content: "\e921";
+}
+.icon-phone3:before {
+  content: "\e917";
+}
+.icon-layers2:before {
+  content: "\e083";
+}
+.icon-data:before {
+  content: "\e921";
+}
+.icon-phone3:before {
+  content: "\e917";
+}

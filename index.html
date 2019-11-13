@@ -3,7 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <!--<link rel="stylesheet" href="//fonts.googleapis.com/css?family=font1|font2|etc" type="text/css">-->
-        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="css/icons.css">
+        <!-- <link rel="stylesheet" href="css/icomoon.css"> -->
         <title>New Website</title>
         <!-- jQuery -->
         <!-- <script src="js/jquery.min.js"></script> -->
@@ -20,13 +23,15 @@
                 <div class="text-center">
                     <div id="headshot" style="background-image: url(images/brendan_piano.jpeg);"></div>
                     <h1 id="my-name"><a href="index.html">Brendan Schlaman</a></h1>
-                    <span id="my-title"><a href="#">DevOps Engineer</a> in America</span>
+                    <span id="my-title"><a>DevOps Engineer</a> and Consultant</span>
                 </div>
                 <nav id="main-menu" class="navbar">
                     <div id="navbar" class="collapse">
                         <ul class="text-center">
                             <li class="active"><a>Home</a></li>
                             <li><a>About</a></li>
+                            <li><a>Projects</a></li>
+                            <li><a>Accomplishments</a></li>
                             <li><a>Skills</a></li>
                             <li><a>Education</a></li>
                             <li><a>Experience</a></li>
@@ -46,6 +51,87 @@
                     <h2>About Me</h2>
                     <div class="section-content">
                         <p>I am a consultant at Accenture.  I specialize in DevOps and development.  I made this website from scratch, using no external libraries or frameworks (although I do know how to use them!).  I am actively seeking opportunities in consulting and DevOps.</p>
+                    </div>
+                </section>
+                <section id="projects" class="main-section" data-section="projects">
+                    <h2>Key Projects</h2>
+                    <div>
+                        <div class="tile-wrapper">
+                            <div class="tile color-1">
+                                <span class="icon">
+                                    <i class="icon-bulb"></i>
+                                </span>
+                                <div class="desc">
+                                    <h3>Appserver Upgrade</h3>
+                                    <p>Led team of Build resources to migrate 23 applications from JBoss6 standalone mode to JBoss7 domain mode.  Project was completed in time with a successful go-live.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile color-2">
+                                <span class="icon">
+                                    <i class="icon-data"></i>
+                                </span>
+                                <div class="desc">
+                                    <h3>Git Migration</h3>
+                                    <p>Migrated 1 major and 19 minor repositories from SVN to git.  Created custom history migration scripts and reconfigured Jenkins to connect to git.  I maintain these respositories and use industry-standard migration processes.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile color-3">
+                                <span class="icon">
+                                    <i class="icon-phone3"></i>
+                                </span>
+                                <div class="desc">
+                                    <h3>Patch Automation</h3>
+                                    <p>Reduced time-to-QA from 3hrs on average to 15 min.  My scripts poll git for changes and automate the deployment to 6 appservers and 35 JVMs across 4 swimlanes.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile color-4">
+                                <span class="icon">
+                                    <i class="icon-layers2"></i>
+                                </span>
+                                <div class="desc">
+                                    <h3>Automated Monitoring</h3>
+                                    <p>Healthcheck scripts beat out licenced software in speed.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile color-5">
+                                <span class="icon">
+                                    <i class="icon-data"></i>
+                                </span>
+                                <div class="desc">
+                                    <h3>Artifactory Builds</h3>
+                                    <p>Reduced codebase by storing static jars in artifactory.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="accomplishments"class="main-section" data-section="accomplishments">
+                    <h2>Major Accomplishments</h2>
+                    <div class="section-content">
+                        <ul>
+                            <li>Managed 5 person team during manager absence, completed major Appserver migration, successful go-live, deadline achieved</li>
+                            <li>Received “Distinguished Achievement” award as a DevOps Engineer at $40bn retailer</li>
+                            <li>Migrated 1 major and 21 minor applications from SVN to git, gave internal talks on git best practices</li>
+                            <li>Fully automated build process for 3GB codebase, reduced average time to QA by 80%</li>
+                            <li>Created automated monitoring scripts; scripts are faster/more reliable than multi-thousand dollar licenced monitoring software; 20% reduction in deployment time</li>
+                            <li>Have driven 18 major and 25 minor production deployments for business-critical software, minimal rollbacks and 0 outages achieved</li>
+                            <li>Fully automated perf environment - build &#8614; environment monitoring &#8614; deploy on JBoss7 domain mode</li>
+                            <li>Coded chatbot used by 60+ developers and testers to get real-time information on environment status</li>
+                            <li>Created Blockchain PoW and ZKP learning tools to assist in internal education on verification protocols</li>
+                            <li>Maintain the repositories of 2 major and 21 minor applications (merging, build automation, production deployments, configurations)</li>
+                            <li>Maintain 5 levels of environment (dev, APT, IPT, QA, performance) comprised of 100+ servers and 7 databases</li>
+                            <li>Manage code for 4 codependent release cycles in Agile work environment across 5 product teams</li>
+                            <li>Internal speaker - educated developers on bash scripting, git best practices, CI/CD model</li>
+                            <li>Successfully triaged 250+ environment issues; expert problem solver</li>
+                        </ul>
                     </div>
                 </section>
                 <section id="skills" class="main-section" data-section="skills">
