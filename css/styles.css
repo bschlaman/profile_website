@@ -152,8 +152,8 @@ div {
     flex-wrap: wrap;
 }
 .skillcard {
-    height: 260px;
-    width: 260px;
+    height: 280px;
+    width: 280px;
     margin: 20px;
     perspective: 1000px;
     outline: 0;
@@ -183,14 +183,31 @@ div {
 .sc-back {
     transform: rotateY(180deg);
 }
+.sc-back p:not(.sc-header), .sc-back a {
+    margin: 1em;
+}
+.sc-back a {
+    display: block;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 800;
+    text-decoration: underline;
+    color: #faf;
+}
 .skillcard:hover .sc-inner {
     transform: rotateY(180deg);
 }
 .skillcard h3 {
     color: inherit;
 }
-#coding .sc-back{
+#coding .sc-back, #technologies .sc-back {
     text-align: center;
+}
+.sc-header {
+    font-weight: 800;
+    font-size: 1.2em;
+    text-align: left;
+    margin: .5em;
 }
 #langs {
     display: flex;
