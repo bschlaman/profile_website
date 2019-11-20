@@ -105,8 +105,7 @@ div {
 
 /* MAIN SECTION */
 .main-section {
-    padding-top: 4em;
-    padding-bottom: 9em;
+    padding-bottom: 7em;
     outline: 2px solid green;
     clear: both;
 }
@@ -141,9 +140,12 @@ div {
     /* This is to even space when mobile */
     margin-top: 5px 0;
 }
+#about {
+    padding-bottom: 0;
+}
 #about .hero-image {
-    height: 500px;
-    background-image: url("../images/folded_arms.png");
+    height: 700px;
+    background-image: url("../images/fade_folded_arms.png");
     background-size: 500px;
     background-repeat: no-repeat;
     background-position: right center;
@@ -367,7 +369,7 @@ div {
         width: 100%;
     }
     #about .section-content {
-        max-width: 400px;
+		font-size: 1.7em;
     }
     #hero a {}
 }
