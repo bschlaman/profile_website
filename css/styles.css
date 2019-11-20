@@ -16,7 +16,11 @@ div {
     outline: 2px solid black;
 }
 
+#side, #main {
+    transition: 1s;
+}
 #side {
+    position: fixed;
     float: left;
     width: 300px;
 }
@@ -24,6 +28,7 @@ div {
     float: right;
     width: calc(100% - 300px);
 }
+
 
 #headshot {
     position: relative;
@@ -52,9 +57,6 @@ div {
 }
 
 /* NAVBAR */
-#side {
-    position: fixed;
-}
 #main-menu {
     width: 100%;
 }
@@ -123,13 +125,21 @@ div {
     color: black;
     font-family: "Playfair Display", Georgia, serif;
 }
+#hero p {
+    display: inline-block;
+    margin: 5px 0;
+}
 #hero a {
-    color: black;
+    display: inline-block;
     border: 1px solid black;
     border-radius: 2px;
+    white-space: nowrap;
+    color: black;
     padding: 3px 7px;
     text-align: center;
     text-transform: uppercase;
+    /* This is to even space when mobile */
+    margin-top: 5px 0;
 }
 #about .hero-image {
     height: 500px;
@@ -139,7 +149,7 @@ div {
     background-repeat: no-repeat;
     background-position: right center;
 }
-#about p {
+#about .section-content p {
     position: relative;
     margin-left: 30px;
     max-width: 400px;
@@ -156,7 +166,6 @@ div {
     width: 280px;
     margin: 20px;
     perspective: 1000px;
-    outline: 0;
 }
 .sc-inner {
     position: relative;
@@ -346,6 +355,23 @@ div {
 }
 .tile-wrapper .tile.color-6 .icon:after {
     border-color: #4054b2 transparent transparent transparent;
+}
+
+/*  MOBILE  */
+@media only screen and (max-width: 768px){
+    /* For mobile phones: */
+    #side {
+         width: 300px;
+         transform: translateX(-300px);
+
+    }
+    #main {
+        width: 100%;
+    }
+    #about .section-content p {
+        max-width: 250px;
+    }
+    #hero a {}
 }
 
 /*  HEADERS  */
