@@ -144,16 +144,15 @@ div {
 #about .hero-image {
     height: 500px;
     background-image: url("../images/folded_arms.png");
-    background-size: center;
     background-size: 500px;
     background-repeat: no-repeat;
     background-position: right center;
 }
-#about .section-content p {
+#about .section-content {
     position: relative;
     margin-left: 30px;
     max-width: 400px;
-    width: auto;
+    font-size: 1.3em;
 }
 
 /* SKILLCARDS */
@@ -235,7 +234,6 @@ div {
   text-transform: none;
 }
 .tile-wrapper {
-    position: relative;
     margin: auto;
     text-align: center;
     max-width: 1000px;
@@ -358,7 +356,7 @@ div {
 }
 
 /*  MOBILE  */
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 990px){
     /* For mobile phones: */
     #side {
          width: 300px;
@@ -368,8 +366,8 @@ div {
     #main {
         width: 100%;
     }
-    #about .section-content p {
-        max-width: 250px;
+    #about .section-content {
+        max-width: 400px;
     }
     #hero a {}
 }
