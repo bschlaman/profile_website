@@ -28,7 +28,20 @@ div {
     float: right;
     width: calc(100% - 300px);
 }
-
+.hamburger {
+    position: fixed;
+    height: 40px;
+    width: 40px;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: 800;
+}
+.hamburger i {
+    visibility: hidden;
+}
 
 #headshot {
     position: relative;
@@ -358,7 +371,7 @@ div {
 }
 
 /*  MOBILE  */
-@media only screen and (max-width: 990px){
+@media screen and (max-width: 990px){
     /* For mobile phones: */
     #side {
          width: 300px;
@@ -372,6 +385,14 @@ div {
 		font-size: 1.7em;
     }
     #hero a {}
+    .hamburger {
+        opacity: 1;
+        background-color: #eea29a;
+        transition: 1.5s;
+    }
+    .hamburger i {
+        visibility: visible;
+    }
 }
 
 /*  HEADERS  */
