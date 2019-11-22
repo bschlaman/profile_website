@@ -37,17 +37,26 @@ var sideMobile = function(){
     document.querySelector('.hamburger').onclick = () => {
         let side = document.querySelector("#side");
         if (side.classList.contains('ham-show')){
-            side.style.transform = 'translateX(-300px)';
+            side.style.transform = 'translateX(-500px)';
             side.classList.remove('ham-show');
         } else {
             side.style.transform = 'translateX(0)';
             side.classList.add('ham-show');
         }
     }
+    let hamAnchors = document.querySelectorAll('.navbar ul li a');
+    for(let i = 0 ; i < hamAnchors.length ; i++){
+        hamAnchors[i].onclick = () => {
+            let side = document.querySelector("#side");
+            side.style.transform = 'translateX(-500px)';
+            side.classList.remove('ham-show');
+        }
+    }
+
 }
 var checkSide = function(){
     let side = document.querySelector("#side");
-    if(window.innerWidth > 1000){
+    if(window.innerWidth > 990){
         side.style.transform = '';
         side.classList.remove('ham-show');
     }
@@ -139,6 +148,11 @@ var navigationSection = function() {
     });
 };
 
+
+var widthDebug = function(){
+    let title = document.querySelector('#hero h1');
+    title.innerHTML = window.innerWidth;
+}
 
 var scrollShit = function() {
     //var element_position = $('#experience').offset().top;
