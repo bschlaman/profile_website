@@ -1,9 +1,8 @@
 window.onload=function(){
     // Declare global vaiables
     navHighlight();
-//    navigationSection();
-
     setOpenNewTab();
+    sideMobile();
 }
 
 // Forces all links to open to a new tab except for the navigation anchors
@@ -32,6 +31,28 @@ var navHighlight = function(){
         });
     }
 }
+
+var sideMobile = function(){
+    window.onresize = checkSide;
+    document.querySelector('.hamburger').onclick = () => {
+        let side = document.querySelector("#side");
+        if (side.classList.contains('ham-show')){
+            side.style.transform = 'translateX(-300px)';
+            side.classList.remove('ham-show');
+        } else {
+            side.style.transform = 'translateX(0)';
+            side.classList.add('ham-show');
+        }
+    }
+}
+var checkSide = function(){
+    let side = document.querySelector("#side");
+    if(window.innerWidth > 1000){
+        side.style.transform = '';
+        side.classList.remove('ham-show');
+    }
+}
+
 
 
 var navActive = function(section) {

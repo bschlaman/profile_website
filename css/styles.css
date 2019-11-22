@@ -17,12 +17,14 @@ div {
 }
 
 #side, #main {
-    transition: 1s;
+    transition: 0.5s;
 }
 #side {
     position: fixed;
     float: left;
     width: 300px;
+    z-index: 5;
+    background-color: #eee;
 }
 #main {
     float: right;
@@ -41,6 +43,7 @@ div {
 }
 .hamburger i {
     visibility: hidden;
+    color: black;
 }
 
 #headshot {
@@ -374,6 +377,7 @@ div {
 @media screen and (max-width: 990px){
     /* For mobile phones: */
     #side {
+         height: 100%;
          width: 300px;
          transform: translateX(-300px);
 
@@ -387,7 +391,6 @@ div {
     #hero a {}
     .hamburger {
         opacity: 1;
-        background-color: #eea29a;
         transition: 1.5s;
     }
     .hamburger i {
