@@ -47,9 +47,11 @@ var sideMobile = function(){
     let hamAnchors = document.querySelectorAll('.navbar ul li a');
     for(let i = 0 ; i < hamAnchors.length ; i++){
         hamAnchors[i].onclick = () => {
-            let side = document.querySelector("#side");
-            side.style.transform = 'translateX(-500px)';
-            side.classList.remove('ham-show');
+            if(window.innerWidth < 990){
+                let side = document.querySelector("#side");
+                side.style.transform = 'translateX(-500px)';
+                side.classList.remove('ham-show');
+            }
         }
     }
 
