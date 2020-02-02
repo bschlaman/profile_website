@@ -264,28 +264,20 @@ div {
     border-bottom: 2px solid #2c98f0;
 }
 .tile-wrapper .tile.color-2 {
-  border-bottom: 2px solid #ec5453;
-}
-.tile-wrapper .tile.color-2 .icon2 i {
-    color: #ec5453;
+    border-bottom: 2px solid #ec5453;
 }
 .tile-wrapper .tile.color-3 {
-  border-bottom: 2px solid #f9bf3f;
-}
-.tile-wrapper .tile.color-3 .icon2 i {
-    color: #f9bf3f;
+    border-bottom: 2px solid #f9bf3f;
 }
 .tile-wrapper .tile.color-4 {
-  border-bottom: 2px solid #a84cb8;
-}
-.tile-wrapper .tile.color-4 .icon2 i {
-    color: #a84cb8;
+    border-bottom: 2px solid #4054b2;
 }
 .tile-wrapper .tile.color-5 {
-  border-bottom: 2px solid #2fa499;
+    border-bottom: 2px solid #a84cb8;
 }
 .tile-wrapper .tile.color-6 {
-  border-bottom: 2px solid #4054b2;
+    border-bottom: 2px solid #5cd65c;
+    /*border-bottom: 2px solid #2fa499;*/
 }
 .tile-wrapper .tile .icon {
     position: absolute;
@@ -347,31 +339,31 @@ div {
     border-color: #f9bf3f transparent transparent transparent;
 }
 .tile-wrapper .tile.color-4 .icon {
-    background: #a84cb8;
-}
-.tile-wrapper .tile.color-4 .icon:before {
-    border-color: transparent transparent #a84cb8 transparent;
-}
-.tile-wrapper .tile.color-4 .icon:after {
-    border-color: #a84cb8 transparent transparent transparent;
-}
-.tile-wrapper .tile.color-5 .icon {
-    background: #2fa499;
-}
-.tile-wrapper .tile.color-5 .icon:before {
-    border-color: transparent transparent #2fa499 transparent;
-}
-.tile-wrapper .tile.color-5 .icon:after {
-    border-color: #2fa499 transparent transparent transparent;
-}
-.tile-wrapper .tile.color-6 .icon {
     background: #4054b2;
 }
-.tile-wrapper .tile.color-6 .icon:before {
+.tile-wrapper .tile.color-4 .icon:before {
     border-color: transparent transparent #4054b2 transparent;
 }
-.tile-wrapper .tile.color-6 .icon:after {
+.tile-wrapper .tile.color-4 .icon:after {
     border-color: #4054b2 transparent transparent transparent;
+}
+.tile-wrapper .tile.color-5 .icon {
+    background: #a84cb8;
+}
+.tile-wrapper .tile.color-5 .icon:before {
+    border-color: transparent transparent #a84cb8 transparent;
+}
+.tile-wrapper .tile.color-5 .icon:after {
+    border-color: #a84cb8 transparent transparent transparent;
+}
+.tile-wrapper .tile.color-6 .icon {
+    background: #5cd65c;
+}
+.tile-wrapper .tile.color-6 .icon:before {
+    border-color: transparent transparent #5cd65c transparent;
+}
+.tile-wrapper .tile.color-6 .icon:after {
+    border-color: #5cd65c transparent transparent transparent;
 }
 
 /*  MOBILE  */

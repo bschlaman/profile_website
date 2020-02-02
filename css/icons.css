@@ -32,4 +32,7 @@
 .icon-heart:before {
   content: "\e950";
 }
+.icon-columns:before {
+  content: "\e104";
+}
 
