@@ -379,8 +379,8 @@ div {
     /* For mobile phones: */
     #side {
          height: 100%;
-         width: 500px;
-         transform: translateX(-500px);
+         width: 300px;
+         transform: translateX(-300px);
     }
     #main {
         width: calc(100% - 80px);
