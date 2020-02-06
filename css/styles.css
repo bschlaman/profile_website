@@ -175,6 +175,11 @@ div {
 }
 
 /* LOGOS */
+
+#techlogos {
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
 .logos {
     display: flex;
     flex-wrap: wrap;
