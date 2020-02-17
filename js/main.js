@@ -37,7 +37,7 @@ var sideMobile = function(){
     document.querySelector('.hamburger').onclick = () => {
         let side = document.querySelector("#side");
         if (side.classList.contains('ham-show')){
-            side.style.transform = 'translateX(-500px)';
+            side.style.transform = 'translateX(-300px)';
             side.classList.remove('ham-show');
         } else {
             side.style.transform = 'translateX(0)';
@@ -49,7 +49,7 @@ var sideMobile = function(){
         hamAnchors[i].onclick = () => {
             if(window.innerWidth < 990){
                 let side = document.querySelector("#side");
-                side.style.transform = 'translateX(-500px)';
+                side.style.transform = 'translateX(-300px)';
                 side.classList.remove('ham-show');
             }
         }

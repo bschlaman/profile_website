@@ -21,8 +21,8 @@ div {
 }
 #side {
     position: fixed;
-    float: left;
     width: 300px;
+    height: 100%;
     z-index: 5;
     background-color: #eee;
 }
