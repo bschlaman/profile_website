@@ -1,93 +1,186 @@
-/** { outline: 0 !important; }*/
-html {
+/*
+	### SETUP
+*/
+
+/* wire-framing */
+div:not(.wrapper) {
+/*	border: 1px solid black;*/
 }
+
+/* defaults */
+table, th, td {
+	border: 1px solid black;
+}
+a {
+	text-decoration: none;
+}
+
+/* global */
 body {
-	font-family: "Quicksand", Arial, sans-serif;
-	color: rgba(0, 0, 0, 0.7);
+	font-family: "Quicksand", sans-serif;
+	background: #f4f4f4;
+	color: rgba(0, 0, 0, 0.9);
+	margin: 0;
 }
 
-/* DIVS */
-#wrapper {
+/* mobile */
+@media screen and (max-width: 990px){
+}
+
+
+/*
+	### CONTENT
+*/
+
+/* Nav Bar */
+.nav-bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 5%;
+	background: #242729;
+}
+.nav-bar img {
+	border-radius: 50%;
+	object-fit: cover;
+	height: 6rem;
+	width: 6rem;
+	box-shadow: 0 0 2pt 1pt white;
+	display: inline-block;
+	vertical-align: middle;
+}
+.contact {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 1rem;
+}
+.contact p {
+	color: rgba(255, 255, 255, 0.9);
+}
+.contact-name {
+	font-size: 1.4rem;
+	margin: 0.3rem;
+}
+.contact-email, .contact-phone {
+	font-size: 1.2rem;
+	margin: 0.2rem;
+}
+.nav-bar a, .nav-bar button {
+	font-size: 1.2rem;
+	color: rgba(255, 255, 255, 0.9);
+}
+.nav-bar ul {
+	padding: 0;
+}
+.nav-bar li {
+	list-style: none;
+	display: inline-block;
+	padding: 0 0.5rem;
+}
+.nav-bar li a {
+	/* so that after can be positioned relative to it */
+	position: relative;
+	transition: all 0.3s ease;
+}
+.nav-bar li a:hover {
+	color: #2496ed;
+}
+.nav-bar li a::after {
+	content: "";
+	position: absolute;
+	bottom: -0.1rem;
+	left: 0;
+	right: 0;
+	height: 0.1rem;
+	background: #2496ed;
+	transform: scaleX(0);
+	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.nav-bar li a:hover::after {
+	transform: scaleX(1);
+}
+.nav-bar button {
+	background: #4d6466;
+	transition: all 0.3s ease;
+	cursor: pointer;
+	border: none;
+}
+.nav-bar button:hover {
+	background: #b7d8d6;
+}
+
+/* hero */
+.hero {
+	/* not sure why this works */
 	overflow: hidden;
+	max-width: 50rem;
+	margin: 1rem auto 0 auto;
 }
-div {
-	outline: 2px solid black;
+.hero-intro {
+	display: inline-block;
+	width: 26rem;
+}
+.hero-intro h1 {
+	margin: 1rem 0 0 3rem;
+}
+.hero-desc {
+	position: relative;
+	font-size: 1rem;
+	margin: 0 0 2rem 4rem;
+}
+.hero-desc::before {
+	content: "";
+	position: absolute;
+	left: -3rem;
+	width: 2rem;
+	top: 50%;
+	height: 0.1rem;
+	transform: translateY(-50%);
+	background: rgba(0, 0, 0, 0.9);
+}
+.hero-desc::after {
+	content: "";
+	position: absolute;
+	width: 2rem;
+	top: 50%;
+	height: 0.1rem;
+	transform: translateY(-50%);
+	background: rgba(0, 0, 0, 0.9);
+	margin-left: 1rem;
+}
+.hero-about {
+	font-size: 1.2rem;
+}
+.hero img {
+	float: right;
+	object-fit: cover;
+	height: 26rem;
+	width: auto;
+	margin: 1rem;
 }
 
-
-/* LOGOS */
-#techlogos {
-	padding-top: 3em;
-	padding-bottom: 3em;
-}
+/* logos */
 .logos {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	outline: 4px solid black;
+	max-width: 50rem;
+	margin: 0 auto;
 }
 .logos img {
-	height: 80px;
-	padding: 25px 25px 25px 25px;
+	height: 4rem;
+	padding: 2rem;
 }
 
-
-/*  MOBILE  */
-@media screen and (max-width: 990px){
-	/* For mobile phones: */
-	#side {
-		 height: 100%;
-		 width: 300px;
-		 transform: translateX(-300px);
-	}
-	#main {
-		width: calc(100% - 80px);
-	}
-	#about .section-content {
-		font-size: 1.7em;
-	}
-	.hamburger {
-		opacity: 1;
-		transition: 1.5s;
-	}
-	.hamburger i {
-		visibility: visible;
-	}
-	#main-menu ul li {
-		margin: 0 0 15px 0;
-		padding: 0;
-		letter-spacing: 1px;
-		font-size: 22px;
-	}
+/* sections */
+section {
+	max-width: 50rem;
+	margin: 0 auto 9rem auto;
 }
-
-/*  HEADERS  */
-h1, h2, h3, h4 {
-	color: #000;
+section h3 {
+	font-size: 1.6rem;
 }
-
-/*  LINKS  */
-a {
-	text-decoration: none;
-	/* color: inherit; */
-	color: blue;
-	cursor: pointer;
-}
-
-/* TABLES */
-table {
-	border-collapse: collapse;
-}
-table, th, td {
-	border: 1px solid black;
-}
-
-/*  GENERAL  */
-.text-center {
-	text-align: center;
-}
-::selection {
-  color: #fff;
-  background: #8c98f0;
+section p {
+	font-size: 1.4rem;
 }
