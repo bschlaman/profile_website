@@ -41,16 +41,16 @@
 					<li><a href="#">Email me</a></li>
 				</ul>
 			</nav>
-			<a class="nav-resume" href="#"><button>Download Resume</button></a>
+			<a class="nav-resume" href="/coming_soon"><button>Download Resume</button></a>
 		</div>
 
 		<!-- hero section -->
 		<div class="hero">
 			<div class="hero-intro">
 				<h1>Brendan Schlaman</h1>
-				<p class="hero-desc">Technologist &#8901; Musician &#8901; CSS Novice</p>
+				<p class="hero-desc">Technologist &#8901; Musician &#8901; Mëme Connoisseur</p>
 				<h4>About Me</h4>
-				<p class="hero-about">I am a consultant at PwC specializing in Cloud DevOps and development. I have a passion for technology, a devotion to creativity, and a propensity towards collaboration. If you're interested in tech, math, or music - let's chat! While this site is still under construction, feel free to browse around.</p>
+				<p class="hero-about">I am a consultant at PwC specializing in Cloud DevOps and development. I have a passion for technology, a devotion to creativity, and a propensity towards collaboration. If you're interested in tech, math, or music - let's chat! While this site is <strong>still under construction</strong>, feel free to browse around.</p>
 			</div>
 			<img src="images/brendan2.png"/>
 		</div>
@@ -69,15 +69,34 @@
 
 		<!-- projects section -->
 		<section id="projects" class="projects-section">
-			<h2>Projects</h2>
+			<h2>Professional and personal projects</h2>
 			<div class="section-content">
-				<ul>
-					<li>Exposure Notifications System</li>
-					<li>Chess Engine</li>
-					<li>Chat Bot</li>
-					<li>Zero Knowledge Proofs</li>
-					<li>Blockchain Learning Tool</li>
-				</ul>
+				<div class="project-wrapper">
+					<h4>Exposure Notifications System</h4>
+					<p>The Exposure Notifications System is privacy preserving solution that alerts people when they may have been exposed to COVID-19.  This collaboration between Google, Apple, and Microsoft has brought together some of Tech's top minds to fight the virus with a strategy that keeps the identity of the platform's users secret.</p>
+					<p>As the Tech Lead for the backend to the Exposure Notifications System, I'm continually inspired to be a part of this effort, and I'm privelaged to work with the brilliant people behind this effort.</p>
+				</div>
+				<div class="project-wrapper">
+					<h4>Chess Engine</h4>
+					<p>As a (terrible) chess player and computer scientist, this project was inevitable.  I found it easier to program an engine that is better than me at chess than to actually improve...</p>
+					<p>You can find the source code for my engine plus a crappy UI below.</p>
+					<p><a href="https://github.com/bschlaman/chess" target="_blank">Chess Engine</a></p>
+					<p><a href="https://github.com/bschlaman/gochess" target="_blank">Golang port</a></p>
+				</div>
+				<div class="project-wrapper">
+					<h4>Chat Bot</h4>
+					<p>While it's no longer my IP, one of my favorite pet projects is a DevOps chat bot written in Node.  My bot allows developers to check on their code and get information about environments that they don't have direct access to.  Plus it works with Slack!</p>
+				</div>
+				<div class="project-wrapper">
+					<h4>Zero Knowledge Proofs</h4>
+					<p>Zero Knowledge Proofs (ZKP) are a little-known spin off of cryptography and blockchain technologies, but I think they have potential to change the world.  I created a POC voting system that leverages ZKP to combat voter fraud.  Check it out below.
+					<p><a href="https://github.com/bschlaman/zkvoting" target="_blank">ZKVoting</a></p>
+				</div>
+				<div class="project-wrapper">
+					<h4>Blockchain Learning Tool</h4>
+					<p>Several years ago, I realized that there aren't many great tools out there that teach cryptocurrencies at a medium difficulty level.  This is my answer to that problem.</p>
+					<p><a href="https://www.schlamalama.com/bc/" target="_blank">Blockchain Learning Tool</a></p>
+				</div>
 			</div>
 		</section>
 
@@ -116,7 +135,7 @@
 					</div>
 					<div class="card-bottom">
 						<p>I have a thorough understanding of key Blockchain principles (transaction verification, fault tolerance, POW, encryption, public ledgers).  I have also coded two Blockchain learning tools, which you can find below:</p>
-						<a href="https://www.schlamalama.com/bc/index.html">Blockchain Learning Tool</a>
+						<a href="https://www.schlamalama.com/bc/">Blockchain Learning Tool</a>
 						<p>I also have experience as a solution architect for an AI-based solution in the healthcare industry.</p>
 					</div>
 				</div>
@@ -205,8 +224,9 @@
 						<p>Leadership</p>
 					</div>
 					<div class="card-bottom">
-						<p>From Operations Lead to Project Manager to Solution Architect, I've worn many hats in the IT world.  In tech, the devil is in the details.  That's why my style of leadership doesn't shy away from the 1s and 0s that make the magic happen.</p>
-						<p>A lack of top down vision from modern IT leaders results in feature creep, poor performance, and technical debt.  I'm here to change that by giving tech teams a seat at the decision making table.</p>
+						<p>From Operations Lead to Project Manager to Solution Architect, I've worn many hats in the IT world.  In tech, the devil is in the details - that's why my style of leadership doesn't shy away from the 1s and 0s that make the magic happen.</p>
+						<p>Fear of experimentation from today's IT leaders results in feature creep, poor performance, and technical debt.  I'm here to offer an alternative.</p>
+						<!-- by giving tech teams a seat at the decision making table. -->
 					</div>
 				</div>
 				<!-- endcard -->
@@ -243,9 +263,9 @@
 
 		<!-- blog section -->
 		<section id="blog" class="blog-section">
-			<h2>Blog and Other Projects</h2>
+			<h2>Blog and other projects</h2>
 			<div class="section-content">
-				<p>Please visit my <a href="https://www.schlamalama.com/brendan/index.html">blog</a> about Zero-Knowledge Proofs!</p>
+				<p>Please visit my <a href="/coming_soon">blog</a> about Zero-Knowledge Proofs!</p>
 				<p>Also, checkout my <a href="https://github.com/bschlaman">github</a> page</p>
 			</div>
 		</section>
@@ -255,14 +275,13 @@
 			<h2>Music</h2>
 			<div class="section-content">
 				<p>Please visit my Soundcloud!</p>
-				<!--a href="https://soundcloud.com/user-880859476">Schlamalama</a-->
-				<a href="">Schlamalama</a>
+				<a href="https://soundcloud.com/user-880859476" target="_blank">Schlamalama</a>
 			</div>
 		</section>
 
 		<!-- contact section -->
 		<section>
-			<h2>Contact Info</h2>
+			<h2>Contact info</h2>
 			<div class="section-content">
 				<h3>Phone</h3>
 				<p>(312)-206-0231</p>
