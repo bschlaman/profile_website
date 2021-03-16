@@ -18,6 +18,9 @@ table, th, td {
 a {
 	text-decoration: none;
 }
+input, select, textarea, button {
+	font-family: inherit;
+}
 
 /* global */
 body {
@@ -105,7 +108,6 @@ body {
 }
 .nav-bar button {
 	background: #242729;
-	transition: all 0.3s ease;
 	cursor: pointer;
 	border: 1px solid rgba(255, 255, 255, 0.9);
 	border-radius: 2px;
@@ -185,16 +187,13 @@ section {
 	max-width: 50rem;
 	margin: 0 auto 9rem auto;
 }
-section h3 {
-	font-size: 1.6rem;
-}
 section p {
 	font-size: 1.4rem;
 }
 
 /* projects section */
 .project-wrapper p {
-	font-size: 1rem;
+/*	font-size: 1rem;*/
 }
 /* skills section */
 .cards-wrapper {
@@ -222,6 +221,9 @@ section p {
 	justify-content: center;
 	border-radius: 1rem 1rem 0 0;
 }
+.card-top p {
+	font-size: 1.4rem;
+}
 .card-bottom {
 	box-sizing: border-box;
 	height: 78%;
@@ -233,8 +235,6 @@ section p {
 .card-bottom p {
 	font-size: 1rem;
 	margin: 0 0 1rem 0;
-}
-.card-bottom a {
 }
 .card-bottom ul {
 	text-align: center;
