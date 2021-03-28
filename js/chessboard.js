@@ -5,38 +5,79 @@ window.onload = function(){
 	let specialSquares = [];
 	let blackView = false;
 
-	let pieces = [];
-	let castlePermission = "KQkq";
-	let enPas = "-";
-	let startFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+	const squares = {
+		a8:   0, b8:   1, c8:   2, d8:   3, e8:   4, f8:   5, g8:   6, h8:   7,
+		a7:  16, b7:  17, c7:  18, d7:  19, e7:  20, f7:  21, g7:  22, h7:  23,
+		a6:  32, b6:  33, c6:  34, d6:  35, e6:  36, f6:  37, g6:  38, h6:  39,
+		a5:  48, b5:  49, c5:  50, d5:  51, e5:  52, f5:  53, g5:  54, h5:  55,
+		a4:  64, b4:  65, c4:  66, d4:  67, e4:  68, f4:  69, g4:  70, h4:  71,
+		a3:  80, b3:  81, c3:  82, d3:  83, e3:  84, f3:  85, g3:  86, h3:  87,
+		a2:  96, b2:  97, c2:  98, d2:  99, e2: 100, f2: 101, g2: 102, h2: 103,
+		a1: 112, b1: 113, c1: 114, d1: 115, e1: 116, f1: 117, g1: 118, h1: 119
+  };
+	const pieceChars = ".PNBRQKpnbrqkx";
+	const startFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 	let testFen = "1r1qkb1r/1bp2pp1/p2p1n1p/3Np3/2pPP3/5N2/PPPQ1PPP/R1B2RK1 w k - 0 13";
+
+	const pieceFileNames = {
+		bp: "images/pieces/pawn_black_60.png",
+		bn: "images/pieces/night_black_60.png",
+		bb: "images/pieces/bishop_black_60.png",
+		br: "images/pieces/rook_black_60.png",
+		bq: "images/pieces/queen_black_60.png",
+		bk: "images/pieces/king_black_60.png",
+		wp: "images/pieces/pawn_white_60.png",
+		wn: "images/pieces/night_white_60.png",
+		wb: "images/pieces/bishop_white_60.png",
+		wr: "images/pieces/rook_white_60.png",
+		wq: "images/pieces/queen_white_60.png",
+		wk: "images/pieces/king_white_60.png",
+	};
+
+	let boardState = {
+		pieces: [],
+		castlePermission: "KQkq",
+		enPas: "-",
+	};
+
+	// load helper functions
+	// TODO: this is clunky
+	helperFunctions();
+
+	// put the pieces where i want in pieces[] and then use the array to put them on the board
+	setPiece(boardState.pieces, "bk", "a8");
+	setPiece(boardState.pieces, "bb", "b8");
+	setPiece(boardState.pieces, "wk", "c8");
+	setPiece(boardState.pieces, "bp", "a7");
+	setPiece(boardState.pieces, "bp", "b7");
+	setPiece(boardState.pieces, "wp", "c6");
+	setPiece(boardState.pieces, "wr", "a1");
+
+	createHTMLPieces(boardState.pieces, pieceFileNames);
+	console.log(boardState);
+
 	let pieceImages = document.querySelectorAll(".chessboard-wrapper img");
 	for(let i = 0 ; i < pieceImages.length ; i++){
 		makeDragable(pieceImages[i]);
 	}
-	placePiece(document.getElementById("piece1"), "a8");
-	placePiece(document.getElementById("piece2"), "b8");
-	placePiece(document.getElementById("piece3"), "c8");
-	placePiece(document.getElementById("piece4"), "a7");
-	placePiece(document.getElementById("piece5"), "b7");
-	placePiece(document.getElementById("piece6"), "c6");
-	placePiece(document.getElementById("piece7"), "a1");
 }
 
 function makeDragable(element){
 	let cursorStartX, cursorStartY, cursorOffsetX, cursorOffsetY;
 	let newX, newY;
+	let boundary = document.querySelector(".chessboard-wrapper").clientWidth - element.clientWidth;
 	element.onmousedown = (e) => {
 		e = e || window.event;
 		e.preventDefault();
+		element.style.zIndex = "2";
 		cursorStartX = e.clientX;
 		cursorStartY = e.clientY;
 		document.onmouseup = () => {
 			document.onmouseup = null;
 			document.onmousemove = null;
+			element.style.zIndex = "1";
 			snapToBoard(element);
 		};
-		let boundary = document.querySelector(".chessboard-wrapper").clientWidth - element.clientWidth;
     document.onmousemove = (e) => {
 			e = e || window.event;
 			e.preventDefault();
@@ -60,22 +101,37 @@ function snapToBoard(element){
 	let row = Math.floor((element.offsetTop+element.clientHeight/2) / squareSize);
 	element.style.left = (col * squareSize) + "px";
 	element.style.top = (row * squareSize) + "px";
+	let alg = helperFunctions.sq120ToAlg(helperFunctions.rcToSq120(row, col));
+	// simple scenenario for now, just removing the piece that's there
+	let toPiece = document.querySelector(".chessboard-pieces .sq-" + alg);
+	if(toPiece && element != toPiece){
+		toPiece.remove();
+	}
+	element.className = "sq-" + alg;
 }
 
-function placePiece(element, square){
+function setPiece(pieces, piece, alg){
+	pieces[helperFunctions.algToSq120(alg)] = piece;
+}
+
+function createHTMLPieces(pieces, pieceFileNames){
 	let squareSize = document.querySelector(".chessboard td").clientWidth;
-	let col = square.charCodeAt(0) - 97;	
-	let row = 8 - parseInt(square[1]);
-	element.style.left = (col * squareSize) + "px";
-	element.style.top = (row * squareSize) + "px";
-}
-
-function configureCanvas(){
-	canvas.addEventListener("mousedown", (event) => {trackmouse(event);});
-}
-
-function switchView(){
-	blackView = !blackView;
+	let piecesContainer = document.querySelector(".chessboard-pieces");
+	// p is the sq120 number
+	for(let i = 0 ; i < 120 ; i++){
+		if(pieces[i] != null){
+			let img = document.createElement("img");
+			img.className = "sq-" + helperFunctions.sq120ToAlg(i);
+			img.src = pieceFileNames[pieces[i]];
+			let [row, col] = helperFunctions.algToRC(helperFunctions.sq120ToAlg(i));
+			img.style.left = (col * squareSize) + "px";
+			img.style.top = (row * squareSize) + "px";
+			img.style.position = "absolute";
+			img.style.width = "12.5%";
+			img.style.height = "12.5%";
+			piecesContainer.appendChild(img);
+		}
+	}
 }
 
 function updateSide(){
@@ -86,102 +142,6 @@ function switchSide(){
 	if(side == "white"){ side = "black"; }
 	else if(side == "black"){ side = "white"; }
 	updateSide();
-}
-
-function drawCanvas(){
-	let canv = document.getElementById("canv");
-	let ctx = canv.getContext("2d");
-	let light = {
-		r: 255,
-		g: 224,
-		b: 102
-	};
-	let dark = {
-		r: 128,
-		g: 102,
-		b: 0
-	};
-	let special = {
-		r: 245,
-		g: 66,
-		b: 93
-	};
-
-	for(let y = 0 ; y < files ; y++){
-		for(let x = 0 ; x < ranks ; x++){
-			let color = {};
-			Object.assign(color, (((x + y) % 2 == 0) ? light : dark));
-			if(rc2Index(y,x) == selSquare){
-				color.r *= 1.8 ; color.g *= 1.8 ; color.b *= 1.8 ;
-			} else if(specialSquares.includes(rc2Index(y,x))){
-				Object.assign(color, special);
-			}
-
-			ctx.fillStyle = "rgb("+color.r+", "+color.g+", "+color.b+")";
-			ctx.fillRect(x * squareSize, y * squareSize, squareSize, squareSize);
-
-			// Adding lettering and numbering on the sides
-			if(x == 0){
-				ctx.textAlign = "left";
-				ctx.textBaseline = "top";
-				color = (((x + y) % 2 != 0) ? light : dark);
-				ctx.fillStyle = "rgb("+color.r+", "+color.g+", "+color.b+")";
-				ctx.font = "24px Arial";
-				if(!blackView){
-					ctx.fillText(8-y, x * squareSize, y * squareSize);
-				} else {
-					ctx.fillText(y+1, x * squareSize, y * squareSize);
-				}
-			}
-			if(y == 7){
-				ctx.textAlign = "left";
-				ctx.textBaseline = "bottom";
-				color = (((x + y) % 2 != 0) ? light : dark);
-				ctx.fillStyle = "rgb("+color.r+", "+color.g+", "+color.b+")";
-				ctx.font = "24px Arial";
-				if(!blackView){
-					ctx.fillText(String.fromCharCode(x+97), x * squareSize, (y+1) * squareSize);
-				} else {
-					ctx.fillText(String.fromCharCode(7-x+97), x * squareSize, (y+1) * squareSize);
-				}
-			}
-		}
-	}
-	drawPieces();
-}
-
-function trackmouse(event){
-	let canvas = document.getElementById("canv");
-	let offset = cumulativeOffset(canvas);
-	let mouseX = event.clientX - offset.left;
-	let mouseY = event.clientY - offset.top;
-
-	let col = Math.floor(mouseX / squareSize);
-	let row = Math.floor(mouseY / squareSize);
-
-	mouseCol = col;
-	mouseRow = row;
-
-	selectSquare();
-
-	// // TESTING
-	// specialSquares = [];
-	// let l1 = [];
-	// let l2 = [];
-	// let l3 = [];
-	// let l4 = [];
-	// l1 = getKSquare(rc2Index(mouseRow, mouseCol));
-	// for(let x = 0 ; x < l1.length ; x++){
-	// 	l2.push(...getKSquare(l1[x]));
-	// }
-	// for(let x = 0 ; x < l2.length ; x++){
-	// 	l3.push(...getKSquare(l2[x]));
-	// }
-	// for(let x = 0 ; x < l3.length ; x++){
-	// 	l4.push(...getKSquare(l3[x]));
-	// }
-	// specialSquares = l4;
-
 }
 
 var getKSquare = function(i){
@@ -252,6 +212,39 @@ var index2RC = function(i){
 	let c = i % 8;
 	let r = (i-c) / 8;
 	return [r,c];
+}
+
+// helper functions
+var helperFunctions = function(){
+	function sq120To64(sq120){
+		return sq120 - 17 - 2 * (sq120 - sq120 % 10) / 10;
+	}
+	function sq64To120(sq64){
+		return sq64 + 21 + 2 * (sq64 - sq64 % 8) / 8;
+	}
+	// row 0 is at the top; used for html positioning
+	function algToRC(alg){
+		return [8 - parseInt(alg.charAt(1)), alg.charCodeAt(0) - 97];
+	}
+	function algToSq120(alg){
+		let [row, col] = algToRC(alg);
+		return sq64To120(col + 8 * (7 - row));
+	}
+	function sq120ToAlg(sq120){
+		let sq64 = sq120To64(sq120);
+		let file = sq64 % 8;
+		let rank = 1 + ((sq64 - sq64 % 8) / 8);
+		return String.fromCharCode(file + 97) + rank.toString();
+	}
+	function rcToSq120(row, col){
+		return sq64To120(col + 8 * (7 - row));
+	}
+	helperFunctions.sq120To64 = sq120To64;
+	helperFunctions.sq64To120 = sq64To120;
+	helperFunctions.algToRC = algToRC;
+	helperFunctions.algToSq120 = algToSq120;
+	helperFunctions.sq120ToAlg = sq120ToAlg;
+	helperFunctions.rcToSq120 = rcToSq120;
 }
 
 var setFEN = function(fen){
