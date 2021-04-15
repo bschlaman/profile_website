@@ -43,7 +43,7 @@
 					<li><a href="#experience">Experience</a></li>
 					<li><a href="#blog">Blog</a></li>
 					<li><a href="#music">Music</a></li>
-					<li><a href="#">Email me</a></li>
+					<li><a href="#contact">Contact me</a></li>
 				</ul>
 			</nav>
 			<a class="nav-resume" href="/coming_soon" target="_blank"><button>Download Resume</button></a>
@@ -61,16 +61,17 @@
 		</div>
 
 		<div class="logos">
-			<img src="logos/nodejs-logo.png">
-			<img src="logos/linux-logo.png">
-			<img src="logos/docker-logo.png">
-			<img src="logos/kubernetes-logo.png">
-			<img src="logos/python-logo.png">
+			<img src="images/logos/nodejs-logo.png">
+			<img src="images/logos/python-logo.png">
+			<img src="images/logos/go-logo.png">
+			<img src="images/logos/c-logo.webp">
+			<img src="images/logos/linux-logo.png">
 			<div class="flex-break"></div>
-			<img src="logos/gcp-logo.png">
-			<img src="logos/azure-logo.png">
-			<img src="logos/go-logo.png">
-			<img src="logos/c-logo.webp">
+			<img src="images/logos/gcp2-logo.webp">
+			<img src="images/logos/azure2-logo.png">
+			<img src="images/logos/aws-logo.png">
+			<img src="images/logos/docker-logo.png">
+			<img src="images/logos/kubernetes-logo.png">
 		</div>
 
 		<!-- projects section -->
@@ -302,16 +303,22 @@
 		</section>
 
 		<!-- contact section -->
-		<section>
-			<h2>Contact info</h2>
-			<div class="section-content">
-				<h3>Phone</h3>
-				<p>(312)-206-0231</p>
-				<h3>Email</h3>
-				<p>brendan.schlaman@pwc.com</p>
-				<h3>Website</h3>
-				<p><a href="https://www.schlamalama.com">https://www.schlamalama.com</a></p>
-			</div>
+		<section id="contact" class="contact-section">
+			<h2>Contact me</h2>
+				<div class="contact-form-wrapper">
+					<form action="./message/index.php" method="POST">
+						<p>Name</p>
+						<input type="text" name="fname" placeholder="First Name" onkeydown="return event.key != 'Enter';">
+						<input type="text" name="lname" placeholder="Last Name" onkeydown="return event.key != 'Enter';">
+						<p>Email</p>
+						<input type="text" name="email" placeholder="Email" onkeydown="return event.key != 'Enter';">
+						<p>Subject</p>
+						<input type="text" name="subject" placeholder="Subject" onkeydown="return event.key != 'Enter';">
+						<p>Message</p>
+						<textarea name="message" placeholder="Message"></textarea>
+						<button name="submit_form">Contact Me</button>
+					</form>
+				</div>
 		</section>
 		<!-- add certifications! -->
 

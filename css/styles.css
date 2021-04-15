@@ -299,6 +299,55 @@ section p {
 	display: inline-block;
 	margin: 0.3rem 1.2rem;
 }
+/* contact section */
+.contact-form-wrapper {
+	margin: 0 auto;
+	padding: 1rem;
+	background: #242729;
+	border-radius: 0.5rem;
+}
+.contact-form-wrapper p {
+	color: rgba(255, 255, 255, 0.9);
+	margin: 0.5rem 0 0 0;
+}
+.contact-form-wrapper input[type=text],
+.contact-form-wrapper textarea {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.8rem;
+	margin: 0.5rem 0;
+	border-radius: 0.5rem;
+}
+.contact-form-wrapper input[type=text]:focus,
+.contact-form-wrapper textarea:focus {
+	outline: 0;
+	box-shadow: 0 0 0 2pt #2496ed;
+}
+.contact-form-wrapper input[type=text]:nth-of-type(1) {
+	width: 49%;
+	float: left;
+}
+.contact-form-wrapper input[type=text]:nth-of-type(2) {
+	width: 49%;
+	float: right;
+}
+.contact-form-wrapper textarea {
+	resize: none;
+	height: 8rem;
+}
+.contact-form-wrapper button {
+	background: #242729;
+	cursor: pointer;
+	border: 1px solid rgba(255, 255, 255, 0.9);
+	border-radius: 2px;
+	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 1.4rem;
+}
+.contact-form-wrapper button:hover {
+	color: #2496ed;
+	border: 1px solid #2496ed;
+}
 
 /* mobile */
 @media screen and (max-width: 760px) {
