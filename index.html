@@ -89,21 +89,24 @@
 					<p>You can find the source code for my engine plus a crappy UI below.</p>
 					<p><a href="https://github.com/bschlaman/chess" target="_blank">Chess Engine</a></p>
 					<p><a href="https://github.com/bschlaman/gochess" target="_blank">Golang port</a></p>
-					<div class="chessboard-wrapper">
-						<table class="chessboard">
-							<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-							<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-							<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-							<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-							<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-							<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-							<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-							<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-						</table>
-						<div class="alg files"><p>a</p><p>b</p><p>c</p><p>d</p><p>e</p><p>f</p><p>g</p><p>h</p></div>
-						<div class="alg ranks"><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p></div>
-						<div class="chessboard-pieces"></div>
-					</div>
+						<div class="chessboard-wrapper">
+							<div class="chessboard">
+								<table>
+									<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+									<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+									<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+									<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+									<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+									<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+									<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+									<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+								</table>
+								<div class="alg files"><p>a</p><p>b</p><p>c</p><p>d</p><p>e</p><p>f</p><p>g</p><p>h</p></div>
+								<div class="alg ranks"><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p></div>
+								<div class="chessboard-pieces"></div>
+							</div>
+							<button onclick="createHTMLPieces(window.boardState.pieces, window.pieceFileNames);">Reset Position</button>
+						</div>
 					<p>Sorry... had to use a bit of js to make this chessboard work.  This is a famous chess puzzle by Paul Morphy - can you solve it?  White to play and win.</p>
 				</div>
 				<div class="project-wrapper">
@@ -284,6 +287,31 @@
 			</div>
 		</section>
 
+		<!-- certifications section -->
+		<section id="certifications" class="certifications-section">
+			<h2>Certifications</h2>
+			<div class="certifications-wrapper">
+				<!-- cert -->
+				<div class="certification">
+					<img src="images/aws-sol-arch-assoc.png"/>
+					<div class="certification-description">
+						<p>AWS Solutions Architect Associate</p>
+						<p><em>April 2021</em></p>
+					</div>
+				</div>
+				<!-- endcert -->
+				<!-- cert -->
+				<div class="certification">
+					<img src="images/mulesoft-developer.png"/>
+					<div class="certification-description">
+						<p>Mulesoft Certified Developer</p>
+						<p><em>April 2020</em></p>
+					</div>
+				</div>
+				<!-- endcert -->
+			</div>
+		</section>
+
 		<!-- blog section -->
 		<section id="blog" class="blog-section">
 			<h2>Blog and other projects</h2>
@@ -306,16 +334,16 @@
 		<section id="contact" class="contact-section">
 			<h2>Contact me</h2>
 				<div class="contact-form-wrapper">
-					<form action="./message/index.php" method="POST">
+					<form action="./message/index.php" method="POST" target="_blank">
 						<p>Name</p>
-						<input type="text" name="fname" placeholder="First Name" onkeydown="return event.key != 'Enter';">
-						<input type="text" name="lname" placeholder="Last Name" onkeydown="return event.key != 'Enter';">
+						<input type="text" name="fname" required placeholder="First Name" onkeydown="return event.key != 'Enter';">
+						<input type="text" name="lname" required placeholder="Last Name" onkeydown="return event.key != 'Enter';">
 						<p>Email</p>
-						<input type="text" name="email" placeholder="Email" onkeydown="return event.key != 'Enter';">
+						<input type="text" name="email" required placeholder="Email" onkeydown="return event.key != 'Enter';">
 						<p>Subject</p>
-						<input type="text" name="subject" placeholder="Subject" onkeydown="return event.key != 'Enter';">
+						<input type="text" name="subject" required placeholder="Subject" onkeydown="return event.key != 'Enter';">
 						<p>Message</p>
-						<textarea name="message" placeholder="Message"></textarea>
+						<textarea name="message" required placeholder="Message"></textarea>
 						<button name="submit_form">Contact Me</button>
 					</form>
 				</div>
