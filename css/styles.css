@@ -2,9 +2,14 @@
 	### SETUP
 */
 
-/* wire-framing */
-div:not(.wrapper) {
-/*	border: 1px solid black;*/
+:root {
+	/* off white */
+	--color1: #f4f4f4;
+	/* charcoal */
+	--color2: #242729;
+	/* blue highlight */
+	--color3: #2496ed;
+	--font: "Quicksand", sans-serif;
 }
 
 /* defaults */
@@ -21,8 +26,8 @@ input, select, textarea, button {
 
 /* global */
 body {
-	font-family: "Quicksand", sans-serif;
-	background: #f4f4f4;
+	font-family: var(--font);
+	background: var(--color1);
 	color: rgba(0, 0, 0, 0.9);
 	margin: 0;
 }
@@ -30,6 +35,11 @@ body {
 /* TODO: better way? */
 .wrapper {
 	overflow-x: hidden;
+}
+
+/* wire-framing */
+div:not(.wrapper) {
+/*	border: 1px solid black;*/
 }
 
 /*
@@ -49,7 +59,7 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	padding: 1rem 5%;
-	background: #242729;
+	background: var(--color2);
 }
 .nav-bar img {
 	border-radius: 50%;
@@ -94,7 +104,7 @@ body {
 	transition: all 0.3s ease;
 }
 .nav-bar li a:hover {
-	color: #2496ed;
+	color: var(--color3);
 }
 .nav-bar li a::after {
 	content: "";
@@ -103,7 +113,7 @@ body {
 	left: 0;
 	right: 0;
 	height: 0.1rem;
-	background: #2496ed;
+	background: var(--color3);
 	transform: scaleX(0);
 	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -111,15 +121,15 @@ body {
 	transform: scaleX(1);
 }
 .nav-bar button {
-	background: #242729;
+	background: var(--color2);
 	cursor: pointer;
 	border: 1px solid rgba(255, 255, 255, 0.9);
 	border-radius: 2px;
 	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .nav-bar button:hover {
-	color: #2496ed;
-	border: 1px solid #2496ed;
+	color: var(--color3);
+	border: 1px solid var(--color3);
 }
 
 /* hero */
@@ -228,7 +238,7 @@ section p {
 }
 .chessboard table tr:nth-child(odd) td:nth-child(odd),
 .chessboard table tr:nth-child(even) td:nth-child(even) {
-	background: #242729;
+	background: var(--color2);
 }
 .chessboard .ranks {
 	position: absolute;
@@ -273,7 +283,7 @@ section p {
 }
 .card-top {
 	height: 22%;
-	background: #242729;
+	background: var(--color2);
 	color: rgba(255, 255, 255, 0.8);
 	display: flex;
 	align-items: center;
@@ -287,7 +297,7 @@ section p {
 .card-bottom {
 	box-sizing: border-box;
 	height: 78%;
-	background: #f4f4f4;
+	background: var(--color1);
 	color: rgba(0, 0, 0, 0.8);
 	border-radius: 0 0 1rem 1rem;
 	padding: 1rem 1rem 0 1rem;
@@ -327,7 +337,7 @@ section p {
 	margin-bottom: 1.5rem;
 }
 .certification-description {
-	border-top: 2px solid #2496ed;
+	border-top: 2px solid var(--color3);
 	margin-top: 2rem;
 	padding: 0 1rem 0 1rem;
 }
@@ -342,7 +352,7 @@ section p {
 .contact-form-wrapper {
 	margin: 0 auto;
 	padding: 1rem;
-	background: #242729;
+	background: var(--color2);
 	border-radius: 0.5rem;
 }
 .contact-form-wrapper p {
@@ -360,7 +370,7 @@ section p {
 .contact-form-wrapper input[type=text]:focus,
 .contact-form-wrapper textarea:focus {
 	outline: 0;
-	box-shadow: 0 0 0 2pt #2496ed;
+	box-shadow: 0 0 0 2pt var(--color3);
 }
 .contact-form-wrapper input[type=text]:nth-of-type(1) {
 	width: 49%;
@@ -375,7 +385,7 @@ section p {
 	height: 8rem;
 }
 .contact-form-wrapper button {
-	background: #242729;
+	background: var(--color2);
 	cursor: pointer;
 	border: 1px solid rgba(255, 255, 255, 0.9);
 	border-radius: 2px;
@@ -384,8 +394,8 @@ section p {
 	font-size: 1.4rem;
 }
 .contact-form-wrapper button:hover {
-	color: #2496ed;
-	border: 1px solid #2496ed;
+	color: var(--color3);
+	border: 1px solid var(--color3);
 }
 
 /* mobile */
