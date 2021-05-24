@@ -9,6 +9,10 @@
 	--color2: #242729;
 	/* blue highlight */
 	--color3: #2496ed;
+	/* slightly transparent black */
+	--transp-black: rgba(0, 0, 0, 0.9);
+	/* slightly transparent white */
+	--transp-white: rgba(255, 255, 255, 0.9);
 	--font: "Quicksand", sans-serif;
 }
 
@@ -28,7 +32,7 @@ input, select, textarea, button {
 body {
 	font-family: var(--font);
 	background: var(--color1);
-	color: rgba(0, 0, 0, 0.9);
+	color: var(--transp-black);
 	margin: 0;
 }
 /* workaround for weirdness */
@@ -76,7 +80,7 @@ div:not(.wrapper) {
 	margin-left: 1rem;
 }
 .contact p {
-	color: rgba(255, 255, 255, 0.9);
+	color: var(--transp-white);
 }
 .contact-name {
 	font-size: 1.4vw;
@@ -88,7 +92,7 @@ div:not(.wrapper) {
 }
 .nav-bar a, .nav-bar button {
 	font-size: 1.4vw;
-	color: rgba(255, 255, 255, 0.9);
+	color: var(--transp-white);
 }
 .nav-bar ul {
 	padding: 0;
@@ -123,7 +127,7 @@ div:not(.wrapper) {
 .nav-bar button {
 	background: var(--color2);
 	cursor: pointer;
-	border: 1px solid rgba(255, 255, 255, 0.9);
+	border: 1px solid var(--transp-white);
 	border-radius: 2px;
 	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -159,7 +163,7 @@ div:not(.wrapper) {
 	top: 50%;
 	height: 0.1rem;
 	transform: translateY(-50%);
-	background: rgba(0, 0, 0, 0.9);
+	background: var(--transp-black);
 }
 .hero-desc::after {
 	content: "";
@@ -168,7 +172,7 @@ div:not(.wrapper) {
 	top: 50%;
 	height: 0.1rem;
 	transform: translateY(-50%);
-	background: rgba(0, 0, 0, 0.9);
+	background: var(--transp-black);
 	margin-left: 1rem;
 }
 .hero-about {
@@ -288,7 +292,7 @@ section p {
 .card-top {
 	height: 22%;
 	background: var(--color2);
-	color: rgba(255, 255, 255, 0.8);
+	color: var(--transp-white);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -302,7 +306,7 @@ section p {
 	box-sizing: border-box;
 	height: 78%;
 	background: var(--color1);
-	color: rgba(0, 0, 0, 0.8);
+	color: var(--transp-black);
 	border-radius: 0 0 1rem 1rem;
 	padding: 1rem 1rem 0 1rem;
 }
@@ -360,7 +364,7 @@ section p {
 	border-radius: 0.5rem;
 }
 .contact-form-wrapper p {
-	color: rgba(255, 255, 255, 0.9);
+	color: var(--transp-white);
 	margin: 0.5rem 0 0 0;
 }
 .contact-form-wrapper input[type=text],
@@ -391,10 +395,10 @@ section p {
 .contact-form-wrapper button {
 	background: var(--color2);
 	cursor: pointer;
-	border: 1px solid rgba(255, 255, 255, 0.9);
+	border: 1px solid var(--transp-white);
 	border-radius: 2px;
 	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-	color: rgba(255, 255, 255, 0.9);
+	color: var(--transp-white);
 	font-size: 1.4rem;
 }
 .contact-form-wrapper button:hover {
