@@ -14,6 +14,7 @@
 	/* slightly transparent white */
 	--transp-white: rgba(255, 255, 255, 0.9);
 	--font: "Quicksand", sans-serif;
+	--max-width: 50rem;
 }
 
 /* defaults */
@@ -65,11 +66,15 @@ div:not(.wrapper) {
 	padding: 1rem 5%;
 	background: var(--color2);
 }
+.img-contact-wrapper {
+	/* prevent wrapping of inline-block elements */
+	white-space: nowrap;
+}
 .nav-bar img {
 	border-radius: 50%;
 	object-fit: cover;
-	width: 6vw;
-	height: 6vw;
+	width: 6rem;
+	height: 6rem;
 	box-shadow: 0 0 2pt 1pt white;
 	display: inline-block;
 	vertical-align: middle;
@@ -83,19 +88,20 @@ div:not(.wrapper) {
 	color: var(--transp-white);
 }
 .contact-name {
-	font-size: 1.4vw;
-	margin: 0.3vw;
+	font-size: 1.4rem;
+	margin: 0.3rem;
 }
 .contact-email, .contact-phone {
-	font-size: 1.2vw;
-	margin: 0.2vw;
+	font-size: 1.2rem;
+	margin: 0.2rem;
 }
 .nav-bar a, .nav-bar button {
-	font-size: 1.4vw;
+	font-size: max(1rem, 1.4vw);
 	color: var(--transp-white);
 }
 .nav-bar ul {
 	padding: 0;
+	white-space: nowrap;
 }
 .nav-bar li {
 	list-style: none;
@@ -140,7 +146,7 @@ div:not(.wrapper) {
 .hero {
 	/* not sure why this works */
 	overflow: hidden;
-	max-width: 50rem;
+	width: min(90%, var(--max-width));
 	margin: 5rem auto 0 auto;
 }
 .hero-intro {
@@ -192,7 +198,7 @@ div:not(.wrapper) {
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	max-width: 50rem;
+	width: min(90%, var(--max-width));
 	margin: 0 auto 5rem auto;
 }
 .logos img {
@@ -209,7 +215,7 @@ div:not(.wrapper) {
 */
 
 section {
-	max-width: 50rem;
+	width: min(90%, var(--max-width));
 	margin: 0 auto 9rem auto;
 }
 section p {
@@ -406,31 +412,27 @@ section p {
 	border: 1px solid var(--color3);
 }
 
-/* mobile */
-@media screen and (max-width: 760px) {
-	.nav-bar button {
+/* responsive */
+@media screen and (min-width: 1200px){
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+	.nav-bar ul {
 		display: none;
 	}
 }
-/*@media screen and (max-width: 1170px) {*/
-/*	.nav-bar img {*/
-/*		display: none;*/
-/*	}*/
-/*	.contact {*/
-/*		margin-left: 0;*/
-/*	}*/
-/*}*/
-/*@media screen and (max-width: 800px) {*/
-/*	.nav-bar {*/
-/*		justify-content: center;*/
-/*	}*/
-/*	.nav-bar nav {*/
-/*		display: none;*/
-/*	}*/
-/*	.nav-bar img {*/
-/*		display: inline-block;*/
-/*	}*/
-/*	.contact {*/
-/*		margin-left: 1rem;*/
-/*	}*/
-/*}*/
+@media screen and (min-width: 577px) and (max-width: 991px) {
+	.nav-bar ul {
+		display: none;
+	}
+	.nav-bar img {
+		display: none;
+	}
+}
+@media screen and (max-width: 576px) {
+	.nav-bar ul {
+		display: none;
+	}
+	.nav-bar img {
+		display: none;
+	}
+}
