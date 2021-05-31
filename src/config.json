@@ -1,0 +1,5 @@
+{
+	"key":  "/usr/src/certs/privkey.pem",
+	"cert": "/usr/src/certs/fullchain.pem",
+	"logostring64": "IF9fX18gIF9fICBfXyBfX19fICAKfCBfXyApfCAgXC8gIC8gX19ffCAKfCAgXyBcfCB8XC98IFxfX18gXCAKfCB8XykgfCB8ICB8IHxfX18pIHwKfF9fX18vfF98ICB8X3xfX19fLyAK"
+}
