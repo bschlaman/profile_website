@@ -94,6 +94,14 @@ app.get("/favicon-32.png", (req, res) => {
 app.use(express.static(path.join(staticAssetsPath, "main")));
 app.use("/web_templates", express.static(path.join(staticAssetsPath, "web_templates")));
 app.use("/blog", express.static(path.join(staticAssetsPath, "blog")));
+app.use("/coming_soon", express.static(path.join(staticAssetsPath, "coming_soon")));
+app.use("/chess", express.static(path.join(staticAssetsPath, "chess")));
+app.use("/bc", express.static(path.join(staticAssetsPath, "bc")));
+
+app.post("/contact", (req, res) => {
+	logfile(JSON.stringify(req.body));
+	res.send("Thank you for your message.  I will respond shortly.");
+});
 
 
 const startTime = new Date().toLocaleString();
