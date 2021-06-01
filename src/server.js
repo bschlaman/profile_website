@@ -91,9 +91,18 @@ app.get("/favicon.png", (req, res) => {
 app.get("/favicon-32.png", (req, res) => {
 	res.sendFile(path.join(staticAssetsPath, "favicon-32.png"));
 });
+app.get("/resume", (req, res) => {
+	res.sendFile("/usr/src/assets/Brendan_Schlaman_Resume_2021.pdf");
+});
 app.use(express.static(path.join(staticAssetsPath, "main")));
 app.use("/web_templates", express.static(path.join(staticAssetsPath, "web_templates")));
 app.use("/blog", express.static(path.join(staticAssetsPath, "blog")));
+app.get("/zkp", (req, res) => {
+	res.sendFile(path.join(staticAssetsPath, "blog", "zkp.html"));
+});
+app.get("/chess_programming", (req, res) => {
+	res.sendFile(path.join(staticAssetsPath, "blog", "chess_programming.html"));
+});
 app.use("/coming_soon", express.static(path.join(staticAssetsPath, "coming_soon")));
 app.use("/chess", express.static(path.join(staticAssetsPath, "chess")));
 app.use("/bc", express.static(path.join(staticAssetsPath, "bc")));

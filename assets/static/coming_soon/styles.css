@@ -1,0 +1,35 @@
+body, html {
+	height: 100%;
+	margin: 0;
+}
+.wrapper {
+	background-image: url('./place_beyond_belief.jpg');
+	height: 100%;
+	background-size: cover;
+	color: white;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 2rem;
+	text-align: center;
+}
+.wrapper h1 {
+	display: inline-block;
+}
+.wrapper hr {
+	margin: auto;
+	width: 40%;
+}
+.wrapper a {
+	text-decoration: none;
+	color: #fad7c3;
+	font-weight: 900;
+	text-shadow: 0 0 10px #e8ba98;
+}
+.contact {
+	position: absolute;
+	bottom: 1rem;
+	left: 50%;
+	width: 100%;
+	transform: translateX(-50%);
+	font-size: 1.5rem;
+}
+

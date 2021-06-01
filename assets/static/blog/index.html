@@ -8,21 +8,64 @@
 
 	<!-- css, favicon, title -->
 	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="icon" type="image/png" href="/favicon.png" />
 	<title>Brendan Schlaman | Blog</title>
 
-	<!-- highligh.js -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
+	<!-- highlight.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/a11y-dark.min.css">
+	<script>hljs.highlightAll();</script>
 </head>
 <body><!-- workaround for FOUC --><script>let FF_FOUC_FIX;</script>
 <div class="wrapper">
+<header>
 	<h2>Essays:</h2>
 	<ul>
-		<li><a href="#" target="_blank">Zero Knowledge Proofs</a></li>
-		<li><a href="#" target="_blank">Chess Programming</a></li>
-		<li><a href="#" target="_blank">Cryptography</a></li>
+		<li><a href="/chess_programming" target="_blank">Chess Programming</a></li>
+		<li><a href="/cryptography" target="_blank">Cryptography</a></li>
+		<li><a href="/zkp" target="_blank">Zero Knowledge Proofs</a></li>
 	</ul>
+</header>
+<main>
+	<!-- post -->
+	<div class="blog-post">
+		<h3>My Thoughts on C</h3>
+		<p class="date-time">December 26, 2020</p>
+		<p>Scripting is the meat and potatoes of DevOps, and it's where I feel at ${HOME}.  The toolsets available to scripters like myself have an altogether different set of requirements than other programming languages.  A scripting language should be portable, interpreted, and infinitely extensible.  Runtime performance and memory management are but afterthoughts in scripts which can take hours to complete.  Bash fits the role perfectly, and it's my favorite language.  However, as a firm believer in the Unix philosophy, it was time to put my money where my mouth is.  It's why I chose to write my chess engine in C.</p>
+	</div>
+	<!-- endpost -->
+	<!-- post -->
+	<div class="blog-post">
+		<h3>On Efficient Move Generation</h3>
+		<p class="date-time">April 24, 2021</p>
+		<p>There are two methods I have tried in generating legal moves:</p>
+		<ul>
+			<li>Use a inCheck() method to determine if a move will leave the king in check</li>
+			<li>Keep a list of pinned pieces and treat their move options differently</li>
+		</ul>
+		<p>Both methods yielded similar perft results, neither of which were very good.  I need to refactor my legal move generation and make this process far more efficient.</p>
+	</div>
+	<!-- endpost -->
+	<!-- post -->
+	<div class="blog-post">
+		<h3>Raspberry Pi, Oh my</h3>
+		<p class="date-time">June 1, 2021</p>
+	</div>
+	<!-- endpost -->
+	<!-- post -->
+	<div class="blog-post">
+		<h3>Doge</h3>
+		<p class="date-time">June 1, 2021</p>
+	</div>
+	<!-- endpost -->
+	<!-- post -->
+	<div class="blog-post">
+		<h3>Learning the tools you have</h3>
+		<p class="date-time">June 1, 2021</p>
+		<p>Talk about my talk at BBY</p>
+	</div>
+	<!-- endpost -->
+</main>
 <!-- end of wrapper div -->
 </div>
 </body>

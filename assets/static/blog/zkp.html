@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- metas -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Brendan Schlaman">
+
+	<!-- css, favicon, title -->
+	<link rel="stylesheet" type="text/css" href="/blog/styles.css">
+	<link rel="icon" type="image/png" href="/favicon.png" />
+	<title>Brendan Schlaman | Blog</title>
+
+	<!-- highlight.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/a11y-dark.min.css">
+	<script>hljs.highlightAll();</script>
+</head>
+<body><!-- workaround for FOUC --><script>let FF_FOUC_FIX;</script>
+<div class="wrapper">
+<header>
+	<h2>Essays:</h2>
+	<ul>
+		<li><a href="/chess_programming" target="_blank">Chess Programming</a></li>
+		<li><a href="/cryptography" target="_blank">Cryptography</a></li>
+		<li><a href="/zkp" target="_blank">Zero Knowledge Proofs</a></li>
+	</ul>
+</header>
+<main>
+	<p>The following documents my notes from learning about Zero Knowledge Proofs in Fall of 2019.</p>
+	<div class="journal-entry">
+		<h2>Day 1</h2>
+		<p class="date-time">Sun Aug 11 20:00:22 UTC 2019</p>
+		<p>I know only the basics of ZKP.  I have written a python script that reveals (and then mixes) one row or column of a simplified sudoku puzzle and displays the mathematical probability of a solved puzzle.  My goal for today is to watch and take notes on 3 youtube videos and scan through the zkp wikipedia page.</p>
+		<a href="https://youtu.be/J3jKROwTPCs" target="_blank">Zero Knowledge Proofs and Their Future Applications (2018)</a>
+		<ul>
+			<li>ZKP use case: any time computations and models benefit from including private information as variables</li>
+			<li>Private Computation is different that Private Communication</li>
+			<li>Any function f can be computed privately</li>
+		</ul>
+		<a href="https://www.youtube.com/watch?v=ZP1tTXWfxZI" target="_blank">Zero Knowledge Proofs and Smart Contracts with Bulletproofs</a>
+		<ul>
+			<li>Properties of a ZKP
+				<ul>
+					<li>Completeness - If statement is true, verifier is convinced</li>
+					<li>Soundness - If statement is false, no one-can convince the verifier that it's true</li>
+					<li>Zero-knowledge - Verifier learns nothing other than the truth of the statement</li>
+				</ul>
+			</li>
+			<li>Further reading
+				<ul>
+					<li>Single Range Proof - https://doc-internal.dalek.rs/bulletproofs/notes/index.html</li>
+					<li>Constraint systems - https://medium.com/interstellar/programmable-constraint-systems-for-bulletproofs-365b9feb92f7</li>
+				</ul>
+			</li>
+		</ul>
+		<a href="https://youtu.be/jr95o_k_SwI" target="_blank">Introduction to SNARKs</a>
+		<ul>
+			<li>Using polynomials in a zkp protocol detects errors</li>
+			<li>ZK is achieved through encrypting the verifiers secret evaluation polynomial evaluation point</li>
+		</ul>
+	</div>
+	<div class="journal-entry">
+		<h2>Day 2</h2>
+		<p class="date-time">Mon Aug 12 21:18:08 UTC 2019</p>
+		<p>I'm starting to get excited; it seems that the road to understanding ZKP (for me at least) requires an understanding of Bulletproof, a concept which I heard about through the second video from yesterday.  Goal for today is to finish that second video, find a third, and prepare some documents for printing on 8/13.</p>
+		<p>There are three protocols I want to explore</p>
+		<ol>
+			<li>zkSnarks</li>
+			<li>zkStarks</li>
+			<li>Bulletproof</li>
+		</ol>
+	</div>
+	<div class="journal-entry">
+		<h2>Day 3</h2>
+		<p class="date-time">Wed 14 Aug 2019 09:24:33 PM UTC</p>
+		<p>I want to invest time in one of the three protocols listed from day 2.  The goal for today is to gather preliminary info on each one, such that I might target one soon.</p>
+		<p>After some quick searching, it seems that STARKs and Bulletproof are more complicated iterations of SNARKs.  For this reason, I will seek to understand the latter.  First reading on the subject is from the Zcash <a href="https://z.cash/technology/zksnarks/">website</a>.</p>
+	</div>
+	<div class="journal-entry">
+		<h2>Day 4</h2>
+		<p class="date-time">Sat 17 Aug 2019 04:13:29 PM UTC</p>
+		<p>The goal for today is to read throught the zcash snarks page fully and take notes.</p>
+		<p><strong>Computation → Arithmetic Circuit → R1CS → QAP → zk-SNARK</strong></p>
+		<p>Steps to turn transaction validity into a mathematical representation:
+			<ol>
+				<li>Break down logical steps into smallest possible operators: addition, subtraction, multiplication, and division</li>
+				<li>Build a Rank 1 Constraint System (R1CS) to check that the values are correct after each operation.  QAP allows combination of these operations into polynomials such that only one random point needs to be tested.  Homomorphic encryption and elliptic curve pairing provide obsuring of the validation point.</li>
+				<li>ZK acheived through "random shifts" of original polynomial that still satisfy the required identity.</li>
+			</ol>
+		</p>
+		<p>The sender of a shielded transaction constructs a proof to show the following:
+			<ul>
+				<li>The input values sum to the output values for each shielded transfer.</li>
+	er proves that they have the private spending keys of the input notes, giving them the authority to spend.</li>
+				<li>The private spending keys of the input notes are cryptographically linked to a signature over the whole transaction, in such a way that the transaction cannot be modified by a party who did not know these private keys.</li>
+				<li>For each input note, a revealed commitment exists.</li>
+				<li>The nullifiers and note commitments are computed correctly.</li>
+				<li>It is infeasible for the nullifier of an output note to collide with the nullifier of any other note.</li> 
+			</ul>
+		</p>
+	</div>
+	<div class="journal-entry">
+		<h2>Day 5</h2>
+		<p class="date-time">Sun 18 Aug 2019 02:13:55 PM UTC</p>
+		<p>Goal for today is to follow the roadmap for SNARKs on the zcash website.</p>
+		<p>Part 1: Homomorphic Hidings</p>
+		<p>Today, I read through part 1 fully and created a few python scripts to accompany my learning.  The first script verifies the <em>almighty identity</em>, while the other can compute the modulus of very large exponents.  After reading through this lesson, I know that I will gain a massive leap in understanding Homomorphic Encryption if I can prove the below identity:</p>
+		<p class="eq"><em>a<sup>b</sup>mod p = a<sup>b mod p-1</sup>mod p</em></p>
+		<p>Once I have this, I can explain why <em>E(x+y)</em> is computable from <em>E(x)</em> and <em>E(y)</em> where <em>E(z) = g<sup>z</sup>(mod p)</em></p>
+	</div>
+	<div class="journal-entry">
+		<h2>Day 6</h2>
+		<p class="date-time">Mon 26 Aug 2019 09:18:27 PM UTC</p>
+		<p>For this post, I'd like to clarify my progress mathematically.  It seems that the key to the above proof is <em>Fermat's Little Theorem</em>, which states that <em>a<sup>p</sup> &#8801 a (mod p)</em> where p is prime.  This proof requires proving that for all a where <em>a &#8802 0 (mod p)</em>, a is invertible (mod p).  This is proven via Bezout's Lemma.  Over the next couple days, I will attempt to flesh out the full proof the statement from Day 4.</p>
+	</div>
+	<div class="journal-entry">
+		<h2>Day 7</h2>
+		<p class="date-time">Sun 15 Sep 2019 02:14:27 PM UTC</p>
+		<p>The bridge between <em>Fermat's Little Theorem</em> and the ZKP example from ZCash's webssite is <a href="http://www.math.stonybrook.edu/~scott/blair/Powers_modulo_prime.html">here</a>.  Unfortunately, I am hung up on Corollary 7, which states that <em>for any b &#8802 0, b<sup>p-1</sup> &#8801 1 (mod p)</em>.  This trivially proves the ZCash example, since, if <em>x &#8801 y (mod p-1)</em>, then <em>b<sup>y</sup> &#8801 b<sup>(p-1)<sup>r</sup></sup>b<sup>x</sup>&#8801 b<sup>x</sup> (mod p)</em>.</p>
+	</div>
+	<div class="journal-entry">
+		<h2>Day 8</h2>
+		<p class="date-time">Wed 25 Sep 2019 10:48:33 PM UTC</p>
+		<p>I've made huge strides in this past week.  I've come to realize that "Homomorphic Hidings" are simply a small piece of the puzzle to get to full homomorphic encription.  Firstly, I now have a full proof of <em>Fermat's Little Theorem</em>.  This, in combination with the trivial proof that <em>x &#8801 y (mod p-1) &#8658 b<sup>x</sup> &#8801 b<sup>y</sup> (mod p)</em> easily demonstrates the homomorphic hiding algorithm.  I have also written a simplet algorithm for computing large power modulus (<em>a<sup>x</sup>mod p</em>) which has proven invaluable; I use it as a python module in many scripts.</p>
+		<p>Key to a complete understanding of this first element of homomorphic encryption lies in the number theory concept of groups and generators, namely the multiplicative group for <em>&#8484<sub>n</sub></em> modulo n: <em>&#8484<sub>n</sub><sup>*</sup></em> (I'll refer to it as G).  <em>|G| = p-1</em> when p is prime; otherwise it is the number of elements in <em>&#8484<sub>n</sub></em> which are coprime with p.</p>
+		<p>I also have come to realize that finding a complete generator given a large prime is a computationally diffictult task; in fact, most generators in DH key-exchange are not complete.  Instead, the trick is to find so-called <em>safe primes</em>, which are primes of the form <em>2q - 1</em> where <em>q</em> is also prime.</p>
+		<p>The next moster to tacke is the concept of encryption through polynomials.  Given some polynomial <em>P</em>, Alice can compute <em>E(P(s))</em> without knowing s, and Bob can get the answer without knowing P.  As for why exactly this is helpful, I have yet to find out!  I'll next turn my attention to The Knowledge of Coefficient Test, which is the next step in the proof.</p>
+		<p>Finally, I now know the requirements to have a secure voting system.  The procol is this:
+		<ul>
+			<li>A voter's encrypted receipt is published publicly</li>
+			<li>A voter can verify the machine's decryption algorithm: the voter will vote several times, get their (now invalid) receipts, jumble them up, and feed them back to the machine to decrypt.</li>
+			<li>Vote buying is impossible, since no one but the machine can decrypt the vote.</li>
+			<li>Multiplying the encrypted votes is the same as adding the unencrypted votes, and so anyone can verify the winner.</li>
+		</ul>
+		Not only is this incredibly cool, but I believe that I'm close to being able to make some python implementation of this relatively soon.  The one part that I can't imagine is the nature of the encryption algorithm... new encryption every time but the properties of the homomorphic hidings are preserved...?
+		</p>
+	</div>
+	<div class="journal-entry">
+		<h2>Day 9</h2>
+		<p class="date-time">Fri 27 Sep 2019 09:56:10 PM UTC</p>
+		<p>Today, I browsed through the remaining learning sections on zk-SNARKS.  The concepts grow increasingly complex to ensure all letters in SNARKS are adered to.  The latter sections rely heavily on Finite Fields, which is another rabbit hole I need to fall down soon.  Since my goal is to make a simple voting protocol, I think that I should look elsewhere for the moment.  I found <a href="https://www.boazbarak.org/cs127/Projects/voting.pdf">this</a> paper which describes a seemingly simple enough encryption algorithm called El Gamal Encryption.  This allows voters to encrpyt a "0" or "1" with a private key generated with a public key provided by some election committee.  Tomorrow I'll try to get this algorithm up and running.</p>
+	</div>
+	<div class="journal-entry">
+		<h2>Day 10</h2>
+		<p class="date-time">Sun 06 Oct 2019 05:59:04 PM UTC</p>
+		<p>Last weekend, I succesfully implemented a voting protocol using ElGamal encryption.  I uploaded it to my <a href="https://github.com/bschlaman/zkvoting">git repo</a>.  The strength of ElGamal encryption is that it is <em>multiplicatively homomorphic</em>; that is <em>ENC(v1) * ENC(v2) * ENC(v3) * ... = ENC(v1 + v2 + v3 + ...)</em>.  This makes it perfect for a voting scheme, since the vote can be tallied and decrypted without ever decrypting an individual vote.  As stated earlier, my goal was to have a protocol with the following properties:
+		<ul>
+			<li>Votes are encrypted.  This ensures that votes are private.</li>
+			<li>Voters cannot decrypt their own votes.  This prevents vote buying (if I give you $100 to vote for candidate A, you have no way of proving to me you did so)</li>
+			<li>Two votes for a particular candidate will look totally different</li>
+			<li>A voter's encrypted receipt is published publicly, so that they can verify that their encryption matches the one they got from the voting machine</li>
+			<li>A voter can verify that their receipt is indeed a good encryption to an arbitrary precision (THIS IS THE ZKP PART!)</li>
+		</ul>
+		</p>
+		<p>I was able to get the taly system working using messages <em>m<sub>0</sub> &#8712 {-1,1}</em> such that <em>m = g<sup>m0</sup> &#8712 {g,1/g}</em>.  In the <a href="https://www.win.tue.nl/~berry/papers/euro97.pdf">paper</a> which I used as a reference, <em>g</em> was denoted as <em>G</em>, and I believe that there is a sublte difference between the two.  In addition, my <em>q</em> has the value of 86028323, which is a safe prime, and I selected <em>g</em> as 65537, which I believe to be a generator of <em>q</em>.  There are some values of g and q whcih I tried that did not work out, and I'm unsure of the mathematical reasons for this.</p>
+		<p>In the next day or so, I implemented a ZKP method for determining if the machine is providing legitimate encryptions.  The voter essentially votes several times, gets the receipts, suffles them, and feeds them back for decrypting.  If the machine successfully decrypts enough in a row, the voter can be confident that the encryptions are valid.  To make this system even more secure, a voter should encrypt their own votes.</p>
+		<p>I'd like to point out some shortcomings in my system.
+			<ul>
+				<li>The system requires interaction to be zero-knowledge.  Non-interaction is a concept that I’m still trying to wrap my brain around</li>
+				<li>In this system, your "message" to be encrypted is either a 1 or -1.  this is so that votes can be added to get a difference and determine the winner.  For math reasons, it takes a great deal longer to encrypt a -1 than a 1 in my system.  Not sure how to get around this one yet!  Right now I'm using a gaussian algorithm to decrypt "-1", which is not efficient for large numbers.</li>
+				<li>The system uses a private key shared among "voting authorities."  The term "voting authorities" should plant images of 1984 in your mind</li>
+			</ul>
+		</p>
+		<p>Next, I plan to turn my attention to Chaum-Pedersen Zero Knowledge Proofs.  Seems like there's a good tool <a href="https://asecuritysite.com/encryption/chaum">here</a>.  This is used in the paper to prove that the encryption is a valid one.</p>
+	</div>
+</main>
+<!-- end of wrapper div -->
+</div>
+</body>
+</html>

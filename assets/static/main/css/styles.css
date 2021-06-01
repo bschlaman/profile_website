@@ -36,6 +36,16 @@ body {
 	color: var(--transp-black);
 	margin: 0;
 }
+section {
+	width: min(90%, var(--max-width));
+	margin: 0 auto 9rem auto;
+}
+section p {
+	font-size: 1.4rem;
+}
+section p > a {
+	text-decoration: underline;
+}
 /* workaround for weirdness */
 /* TODO: better way? */
 .wrapper {
@@ -213,14 +223,6 @@ div:not(.wrapper) {
 /*
 	### CONTENT: sections
 */
-
-section {
-	width: min(90%, var(--max-width));
-	margin: 0 auto 9rem auto;
-}
-section p {
-	font-size: 1.4rem;
-}
 
 /* projects section */
 .project-wrapper p {
