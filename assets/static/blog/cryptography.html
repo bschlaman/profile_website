@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- metas -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Brendan Schlaman">
+
+	<!-- css, favicon, title -->
+	<link rel="stylesheet" type="text/css" href="/blog/styles.css">
+	<link rel="icon" type="image/png" href="/favicon.png" />
+	<title>Brendan Schlaman | Blog</title>
+
+	<!-- highlight.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/a11y-dark.min.css">
+	<script>hljs.highlightAll();</script>
+	<!-- mathjax -->
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body><!-- workaround for FOUC --><script>let FF_FOUC_FIX;</script>
+<div class="wrapper">
+<header>
+	<h2>Essays:</h2>
+	<ul>
+		<li><a href="/chess_programming" target="_blank">Chess Programming</a></li>
+		<li><a href="/cryptography" target="_blank">Cryptography</a></li>
+		<li><a href="/zkp" target="_blank">Zero Knowledge Proofs</a></li>
+	</ul>
+</header>
+<main>
+	<p>This article will be long because I leave very little to the reader to prove. There will be almost no assumptions made - no "just trust me on this". Any mathematical statement I make and don’t subsequently prove, I imply to be trivial. We’ll start with basic arithmetic and programming and end up with a fully functional python program that mimics the RSA public/private key generation capabilities of utilities like openssl and gpg.</p>
+	<p>RSA is an asymmetric cryptosystem, which offers some key benefits over a symmetric cryptosystem like Diffie-Hellman. Perhaps the most notable advantage is that a distinct secret key need not be generated for every message exchange. Whereas Diffie-Hellman is the equivalent of generating a secret key with each party who wants to send you a message, RSA has you create a single lock with which others can encrypt their message to you. Luckily, the concepts here are a superset of the concepts in Diffie-Hellman, so if you understand RSA, you essentially get Diffie-Hellman for free.</p>
+	<p>At its very core, the cryptosystem is thus: With message <span class="math inline">\(m\)</span>, public exponent <span class="math inline">\(e\)</span> (typically 65537), private key <span class="math inline">\(d\)</span>, and <span class="math inline">\(N = p \cdot q\)</span>, where <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are large primes.</p>
+	<p><span class="math inline">\(m^{e} \pmod{N}\)</span> is the encrypted message.<br />
+	Private key <span class="math inline">\(d = (k \cdot \phi(N)+1)/e\)</span> where <span class="math inline">\(k\)</span> satisfies <span class="math inline">\(e \cdot d \equiv 1 \pmod{\phi(N)}\)</span>.<br />
+	Public key is the combination of <span class="math inline">\(N\)</span> and <span class="math inline">\(e\)</span>.</p>
+	<p>The message is decrypted by raising the encrypted message to the power of <span class="math inline">\(d\)</span>, since <span class="math display">\[m^{(k \cdot \phi (N)+1)} \equiv m \pmod{N}\]</span></p>
+	<p>We’ll prove that this holds mathematically, and then find a way to generate large primes to implement our own version of RSA.</p>
+	<h1 id="proof">Proof</h1>
+	<p>We want to show that <span class="math inline">\(m \equiv c^{d} \pmod{N}\)</span>. Since <span class="math inline">\(c \equiv m^{e} \pmod{N}\)</span>, <span class="math display">\[c^{d} \equiv m^{ed} \pmod{N}\]</span> By definition, <span class="math inline">\(e \cdot d \equiv 1 \pmod{\phi(N)}\)</span>, so <span class="math inline">\(e \cdot d - 1 = k * \phi(N)\)</span> Substituting, <span class="math display">\[c^{d} \equiv m^{1 + k * \phi(N)} \pmod{N}\]</span> <span class="math display">\[c^{d} \equiv m(m^{\phi(N)^{k}}) \pmod{N}\]</span></p>
+	
+	<p>There are two cases we need to prove. Case 1: <span class="math inline">\(gcd(m,n) = 1\)</span> Case 2: <span class="math inline">\(gcd(m,n) \ne 1\)</span></p>
+	<h2 id="case-1">Case 1</h2>
+	<p>Case 1 follows directly from Euler’s formula, which states that <span class="math inline">\(m^{\phi(N)} \equiv 1 \pmod{N}\)</span></p>
+	<h2 id="case-2">Case 2</h2>
+	<p>Case 2 is more involved, which is ironic considering that the only time we’d face it is in the case that <span class="math inline">\(m\)</span> is exactly <span class="math inline">\(p\)</span> or <span class="math inline">\(q\)</span>. Since <span class="math inline">\(m\)</span> is taken to be strictly less than <span class="math inline">\(N\)</span>, if <span class="math inline">\(gcd(m, p \cdot q) \ne 1\)</span>, then <span class="math inline">\(gcd(m, p \cdot q) = p\)</span> or <span class="math inline">\(q\)</span>. We’ll prove the case for <span class="math inline">\(p\)</span>, and by symmetry it will be proven for <span class="math inline">\(q\)</span>. First, we claim that <span class="math inline">\(m^{ed} \equiv m \pmod{p}\)</span> and <span class="math inline">\(m^{ed} \equiv m \pmod{q}\)</span> Claim 1: <span class="math display">\[m \equiv 0 \pmod{p}\]</span> <span class="math display">\[m^{ed} \equiv 0^{ed} \pmod{p}\]</span> so <span class="math inline">\(m^{ed} \equiv m \pmod{p}\)</span> by modular transitivity Claim 2: since <span class="math inline">\(gcd(m,p \cdot q) = p\)</span>, <span class="math inline">\(gcd(m,q) = 1\)</span> We can use Euler’s theorem again to show that <span class="math inline">\(m^{\phi(q)} \equiv 1 \pmod{q}\)</span> <span class="math display">\[m^{q-1} \equiv 1 \pmod{q}\]</span> <span class="math display">\[m^{ed} \equiv m^{1+k\phi(q)} \pmod{q}\]</span> <span class="math display">\[m^{ed} \equiv m(m^{((p-1)(q-1))^{k}}) \pmod{q}\]</span> <span class="math inline">\(m^{ed} \equiv 1\)</span> since <span class="math inline">\(m^{q-1} \equiv 1 \pmod{q}\)</span> A theorem from number theory states that: <span class="math inline">\(m^{ed} \equiv m \pmod{p \cdot q}\)</span> since <span class="math inline">\(gcd(p,q) = 1\)</span> (need to track down this theorem)</p>
+</main>
+<!-- end of wrapper div -->
+</div>
+</body>
+</html>

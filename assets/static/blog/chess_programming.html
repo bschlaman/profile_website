@@ -53,6 +53,7 @@ for(i= -1; i&lt;0xBC; i++) b[i] = (i-0x22)&amp;0x88 ? GUARD : DUMMY;
 int invertRows(int i){
   return 0xB0 + i - 2 * (i - i % 0x10);
 }
+
 for(int i = 0; i &lt; 0xBC + 4; i++){
   if(i % 0x10 == 0) printf("\n");
   printf("%c ", (invertRows(i)-0x22)&amp;0x88 ? '-' : 'X');

@@ -100,6 +100,9 @@ app.use("/blog", express.static(path.join(staticAssetsPath, "blog")));
 app.get("/zkp", (req, res) => {
 	res.sendFile(path.join(staticAssetsPath, "blog", "zkp.html"));
 });
+app.get("/cryptography", (req, res) => {
+	res.sendFile(path.join(staticAssetsPath, "blog", "cryptography.html"));
+});
 app.get("/chess_programming", (req, res) => {
 	res.sendFile(path.join(staticAssetsPath, "blog", "chess_programming.html"));
 });
