@@ -17,36 +17,127 @@
 	<script>hljs.highlightAll();</script>
 	<!-- mathjax -->
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<script id="MathJax-script"  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 </head>
 <body><!-- workaround for FOUC --><script>let FF_FOUC_FIX;</script>
 <div class="wrapper">
 <header>
+	<div class="intro">
+		<h1>Cryptography and the RSA Cryptosystem</h1>
+		<img src="media/brendan_piano.jpeg"/>
+		<p class="name">Brendan Schlaman</p>
+		<p class="date-time">June 3, 2021</p>
+	</div>
 	<h2>Essays:</h2>
 	<ul>
-		<li><a href="/chess_programming" target="_blank">Chess Programming</a></li>
-		<li><a href="/cryptography" target="_blank">Cryptography</a></li>
-		<li><a href="/zkp" target="_blank">Zero Knowledge Proofs</a></li>
+		<li><a href="/chess_programming">Chess Programming</a></li>
+		<li class="li-active"><a href="/cryptography">Cryptography</a></li>
+		<li><a href="/zkp">Zero Knowledge Proofs</a></li>
 	</ul>
 </header>
 <main>
-	<p>This article will be long because I leave very little to the reader to prove. There will be almost no assumptions made - no "just trust me on this". Any mathematical statement I make and don’t subsequently prove, I imply to be trivial. We’ll start with basic arithmetic and programming and end up with a fully functional python program that mimics the RSA public/private key generation capabilities of utilities like openssl and gpg.</p>
-	<p>RSA is an asymmetric cryptosystem, which offers some key benefits over a symmetric cryptosystem like Diffie-Hellman. Perhaps the most notable advantage is that a distinct secret key need not be generated for every message exchange. Whereas Diffie-Hellman is the equivalent of generating a secret key with each party who wants to send you a message, RSA has you create a single lock with which others can encrypt their message to you. Luckily, the concepts here are a superset of the concepts in Diffie-Hellman, so if you understand RSA, you essentially get Diffie-Hellman for free.</p>
-	<p>At its very core, the cryptosystem is thus: With message <span class="math inline">\(m\)</span>, public exponent <span class="math inline">\(e\)</span> (typically 65537), private key <span class="math inline">\(d\)</span>, and <span class="math inline">\(N = p \cdot q\)</span>, where <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are large primes.</p>
-	<p><span class="math inline">\(m^{e} \pmod{N}\)</span> is the encrypted message.<br />
-	Private key <span class="math inline">\(d = (k \cdot \phi(N)+1)/e\)</span> where <span class="math inline">\(k\)</span> satisfies <span class="math inline">\(e \cdot d \equiv 1 \pmod{\phi(N)}\)</span>.<br />
-	Public key is the combination of <span class="math inline">\(N\)</span> and <span class="math inline">\(e\)</span>.</p>
-	<p>The message is decrypted by raising the encrypted message to the power of <span class="math inline">\(d\)</span>, since <span class="math display">\[m^{(k \cdot \phi (N)+1)} \equiv m \pmod{N}\]</span></p>
+	<p>This article will be long because I leave very little to the reader to prove.  There will be almost no assumptions made - no "just trust me on this".  Any mathematical statement I make and don’t subsequently prove, I imply to be trivial.  We’ll start with basic arithmetic and programming and end up with a fully functional python program that mimics the RSA public/private key generation capabilities of utilities like openssl and gpg.</p>
+	<p>RSA is an asymmetric cryptosystem, which offers some key benefits over a symmetric cryptosystem like Diffie-Hellman.  Perhaps the most notable advantage is that a distinct secret key need not be generated for every message exchange.  Whereas Diffie-Hellman is the equivalent of generating a secret key with each party who wants to send you a message, RSA has you create a single lock with which others can encrypt their message to you.  Luckily, the concepts here are a superset of the concepts in Diffie-Hellman, so if you understand RSA, you essentially get Diffie-Hellman for free.</p>
+	<p>At its very core, the cryptosystem is thus:</p>
+	<p>With message <span class="math inline">\(m\)</span> such that <span class="math inline">\(m \lt N\)</span>, public exponent <span class="math inline">\(e\)</span> (typically 65537), private key <span class="math inline">\(d\)</span>, and <span class="math inline">\(N = p \cdot q\)</span>, where <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are large primes, messages are encrypted and decrypted via the following.</p>
+	<ul>
+		<li><span class="math inline">\(c = m^{e} \pmod{N}\)</span> is the encrypted message.</li>
+		<li>Private key <span class="math inline">\(d = (k \cdot \phi(N)+1)/e\)</span> where <span class="math inline">\(k\)</span> satisfies <span class="math inline">\(ed \equiv 1 \pmod{\phi(N)}\)</span></li>
+		<li>Public key is the combination of <span class="math inline">\(N\)</span> and <span class="math inline">\(e\)</span>.</li>
+	</ul>
+	<p>The message is decrypted by raising the encrypted message to the power of <span class="math inline">\(d\)</span>, since <span class="math display">\[m^{(k \cdot \phi (N)+1)} \equiv m \pmod{N} \tag{1} \]</span></p>
 	<p>We’ll prove that this holds mathematically, and then find a way to generate large primes to implement our own version of RSA.</p>
-	<h1 id="proof">Proof</h1>
-	<p>We want to show that <span class="math inline">\(m \equiv c^{d} \pmod{N}\)</span>. Since <span class="math inline">\(c \equiv m^{e} \pmod{N}\)</span>, <span class="math display">\[c^{d} \equiv m^{ed} \pmod{N}\]</span> By definition, <span class="math inline">\(e \cdot d \equiv 1 \pmod{\phi(N)}\)</span>, so <span class="math inline">\(e \cdot d - 1 = k * \phi(N)\)</span> Substituting, <span class="math display">\[c^{d} \equiv m^{1 + k * \phi(N)} \pmod{N}\]</span> <span class="math display">\[c^{d} \equiv m(m^{\phi(N)^{k}}) \pmod{N}\]</span></p>
-	
-	<p>There are two cases we need to prove. Case 1: <span class="math inline">\(gcd(m,n) = 1\)</span> Case 2: <span class="math inline">\(gcd(m,n) \ne 1\)</span></p>
-	<h2 id="case-1">Case 1</h2>
-	<p>Case 1 follows directly from Euler’s formula, which states that <span class="math inline">\(m^{\phi(N)} \equiv 1 \pmod{N}\)</span></p>
-	<h2 id="case-2">Case 2</h2>
-	<p>Case 2 is more involved, which is ironic considering that the only time we’d face it is in the case that <span class="math inline">\(m\)</span> is exactly <span class="math inline">\(p\)</span> or <span class="math inline">\(q\)</span>. Since <span class="math inline">\(m\)</span> is taken to be strictly less than <span class="math inline">\(N\)</span>, if <span class="math inline">\(gcd(m, p \cdot q) \ne 1\)</span>, then <span class="math inline">\(gcd(m, p \cdot q) = p\)</span> or <span class="math inline">\(q\)</span>. We’ll prove the case for <span class="math inline">\(p\)</span>, and by symmetry it will be proven for <span class="math inline">\(q\)</span>. First, we claim that <span class="math inline">\(m^{ed} \equiv m \pmod{p}\)</span> and <span class="math inline">\(m^{ed} \equiv m \pmod{q}\)</span> Claim 1: <span class="math display">\[m \equiv 0 \pmod{p}\]</span> <span class="math display">\[m^{ed} \equiv 0^{ed} \pmod{p}\]</span> so <span class="math inline">\(m^{ed} \equiv m \pmod{p}\)</span> by modular transitivity Claim 2: since <span class="math inline">\(gcd(m,p \cdot q) = p\)</span>, <span class="math inline">\(gcd(m,q) = 1\)</span> We can use Euler’s theorem again to show that <span class="math inline">\(m^{\phi(q)} \equiv 1 \pmod{q}\)</span> <span class="math display">\[m^{q-1} \equiv 1 \pmod{q}\]</span> <span class="math display">\[m^{ed} \equiv m^{1+k\phi(q)} \pmod{q}\]</span> <span class="math display">\[m^{ed} \equiv m(m^{((p-1)(q-1))^{k}}) \pmod{q}\]</span> <span class="math inline">\(m^{ed} \equiv 1\)</span> since <span class="math inline">\(m^{q-1} \equiv 1 \pmod{q}\)</span> A theorem from number theory states that: <span class="math inline">\(m^{ed} \equiv m \pmod{p \cdot q}\)</span> since <span class="math inline">\(gcd(p,q) = 1\)</span> (need to track down this theorem)</p>
+	<h2>Proof</h2>
+	<p>We want to show that <span class="math inline">\(m \equiv c^{d} \pmod{N}\)</span>.  Since <span class="math inline">\(c \equiv m^{e} \pmod{N}\)</span>, <span class="math display">\[c^{d} \equiv m^{ed} \pmod{N}\]</span> By definition, <span class="math inline">\(ed \equiv 1 \pmod{\phi(N)}\)</span>, so <span class="math display">\[ed - 1 = k \cdot \phi(N) \tag{2} \]</span> Substituting, <span class="math display">\[c^{d} \equiv m^{1 + k \cdot \phi(N)} \pmod{N}\]</span> <span class="math display">\[c^{d} \equiv m(m^{\phi(N)})^{k} \pmod{N}\]</span></p>
+	<p>There are two cases we need to prove.</p>
+	<ul>
+		<li><strong>Case 1:</strong> <span class="math inline">\(gcd(m,n) = 1\)</span></li>
+		<li><strong>Case 2:</strong> <span class="math inline">\(gcd(m,n) \ne 1\)</span></li>
+	</ul>
+	<h3>Case 1</h3>
+	<p>Case 1 follows directly from Euler’s formula, which states that <span class="math inline">\(m^{\phi(N)} \equiv 1 \pmod{N}\)</span>.</p>
+	<h3>Case 2</h3>
+	<p>Case 2 is more involved, which is ironic considering that the only time we’d face it is in the case that <span class="math inline">\(m\)</span> is exactly <span class="math inline">\(p\)</span> or <span class="math inline">\(q\)</span>.  Since <span class="math inline">\(m\)</span> is taken to be strictly less than <span class="math inline">\(N\)</span>, if <span class="math inline">\(gcd(m, p \cdot q) \ne 1\)</span>, then <span class="math inline">\(gcd(m, p \cdot q) = p\)</span> or <span class="math inline">\(q\)</span>.  We’ll prove the case for <span class="math inline">\(p\)</span>, and by symmetry it will be proven for <span class="math inline">\(q\)</span>.  First, we claim that <span class="math inline">\(m^{ed} \equiv m \pmod{p}\)</span> and <span class="math inline">\(m^{ed} \equiv m \pmod{q}\)</span>.</p>
+	<p><em>Claim 1:</em></p>
+	<p><span class="math display">\[m \equiv 0 \pmod{p}\]</span> <span class="math display">\[m^{ed} \equiv 0^{ed} \pmod{p}\]</span> so <span class="math inline">\(m^{ed} \equiv m \pmod{p}\)</span> by modular transitivity.</p>
+	<p><em>Claim 2:</em></p>
+	<p>Since <span class="math inline">\(gcd(m,p \cdot q) = p\)</span>, <span class="math inline">\(gcd(m,q) = 1\)</span>.  Therefore Euler’s theorem tells us that <span class="math display">\[m^{\phi(q)} \equiv 1 \pmod{q}\]</span> <span class="math display">\[m^{q-1} \equiv 1 \pmod{q}\]</span></p>
+	<p>From (2),<span class="math display">\[m^{ed} \equiv m^{1+k \cdot \phi(N)} \pmod{q}\]</span> <span class="math display">\[m^{ed} \equiv m(m^{(q-1)})^{k(p-1)} \pmod{q}\]</span> So, <span class="math inline">\(m^{ed} \equiv m \pmod{q} \)</span>, since <span class="math inline">\(m^{q-1} \equiv 1 \pmod{q}\)</span></p>
+	<p>Finally, a helpful theorem from number theory states that given claim 1 and claim 2, and since <span class="math inline">\(gcd(p,q) = 1\)</span>: <span class="math display">\[m^{ed} \equiv m \pmod{p \cdot q} \tag{3} \]</span></p>
+	<p>(TODO: I need to track down and prove this theorem).</p>
+	<h2>Pivoting to Python</h2>
+	<p>One of the tools we'll need to implement this cryptosystem is a fast method for computing modular exponentiation with very large numbers.  Luckily, python handles large numbers natively, and provides a little-known 3rd argument option to the <code>pow()</code> function that is the modulo.  Still, I wrote my own function to do this, which I rather like.  I won't step through the code in this article, but it can be rather rewarding to reverse engineer the math buried in the code.</p>
+	<pre><code class="lang-python">
+def large_mod(a,x,p):
+    pwr2 = {1:a%p}
+    total = 1 if not 1 &amp; x else pwr2[1]
+    i = 2
+    while i &lt;= x:
+        pwr2[i] = pow(pwr2[i&gt;&gt;1],2) % p
+        if i &amp; x:
+            total = (total * pwr2[i]) % p
+        i &lt;&lt;= 1
+    return total % p
+	</code></pre>
+	<p>To start, we create some helper functions, like this one to help print out large numbers.  (Note that I am using ascii escape characters for a colored output; e.g. <code>acol.YEL = '\033[93m'</code>).</p>
+	<pre><code class="lang-python">
+def bign_print(x, name):
+    spaces = " " * (18 - len(name))
+    print(f"{name}:{spaces}{acol.YEL}" + str(x)[:18] + f"...{acol.END} ({len(str(x))} digits)")
+	</code></pre>
+	<p>Next, we'll write the function for generating a public + private key pair.  I've chosen to write them out to files here, using similar start and end strings to the openssl standard.</p>
+	<pre><code class="lang-python">
+def gen_keys():
+
+    # public key
+    (p, q) = gen_large_primes()
+    n = p * q
+    phin = (p - 1) * (q - 1)
+    e = 65537
+    if (math.gcd(e, phin) != 1):
+        raise Exception("e and phi(n) are not coprime")
+    with open("./publickey.pem", "w") as f:
+        f.write("--- BEGIN PUBLIC KEY ---\n")
+        f.write(str(e) + "." + str(n))
+        f.write("\n--- END PUBLIC KEY ---\n")
+
+    # private key
+    for k in range(1, e):
+        d = (k * phin + 1) // e
+        if (d * e) % phin == 1:
+            break
+    else:
+        raise Exception("Could not find k s.t. e*d ≡ 1 (mod phi(n))")
+    with open("./privatekey.pem", "w") as f:
+        f.write("--- BEGIN PRIVATE KEY ---\n")
+        f.write(str(d))
+        f.write("\n--- END PRIVATE KEY ---\n")
+	</code></pre>
+	<p>Thanks to the mathematics above, encryption and decryption are trivial.  Here, I read the secret message from a file.</p>
+	<pre><code class="lang-python">
+def encrypt_message(e,n):
+    with open("./msg.txt", "r") as f:
+        msg = f.read()
+    msg_encoded = int(msg.encode("utf-8").hex(), 16)
+    # c is the encrypted message
+    c = pow(msg_encoded,e,n)
+    with open("./msg.asc", "w") as f:
+        f.write("--- BEGIN MESSAGE ---\n")
+        f.write(str(c))
+        f.write("\n--- END MESSAGE ---\n")
+
+def decrypt_message(d,n):
+    with open("./msg.asc", "r") as f:
+        c = f.read().replace("--- BEGIN MESSAGE ---","") \
+                    .replace("--- END MESSAGE ---","") \
+                    .replace("\n", "")
+    msg_encoded = hex(pow(int(c),d,n))
+    msg = bytes.fromhex(msg_encoded[2:]).decode("utf-8")
+    with open("./msg_decrypted.txt", "w") as f:
+        f.write(msg)
+	</code></pre>
+	<p>You may have noticed that there is still one piece of the puzzle missing, which is the mysterious <code>gen_large_primes()</code> function.  All it needs to do is generate some large prime numbers (preferrably &gt; 1024 bytes in length); however, testing for primality with absolute certainty is slow, especially for numbers at the scale we're using.  Luckily the Rabin-Miller test can get us probablistically very close, and fast.</p>
 </main>
 <!-- end of wrapper div -->
 </div>

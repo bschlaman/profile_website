@@ -19,19 +19,25 @@
 <body><!-- workaround for FOUC --><script>let FF_FOUC_FIX;</script>
 <div class="wrapper">
 <header>
+	<div class="intro">
+		<h1>Zero Knowledge Proofs</h1>
+		<img src="media/brendan_piano.jpeg"/>
+		<p class="name">Brendan Schlaman</p>
+		<p class="date-time">June 3, 2021</p>
+	</div>
 	<h2>Essays:</h2>
 	<ul>
-		<li><a href="/chess_programming" target="_blank">Chess Programming</a></li>
-		<li><a href="/cryptography" target="_blank">Cryptography</a></li>
-		<li><a href="/zkp" target="_blank">Zero Knowledge Proofs</a></li>
+		<li><a href="/chess_programming">Chess Programming</a></li>
+		<li><a href="/cryptography">Cryptography</a></li>
+		<li class="li-active"><a href="/zkp">Zero Knowledge Proofs</a></li>
 	</ul>
 </header>
 <main>
-	<p>The following documents my notes from learning about Zero Knowledge Proofs in Fall of 2019.</p>
+	<p>The following documents my notes from researching Zero Knowledge Proofs in Fall of 2019.</p>
 	<div class="journal-entry">
 		<h2>Day 1</h2>
 		<p class="date-time">Sun Aug 11 20:00:22 UTC 2019</p>
-		<p>I know only the basics of ZKP.  I have written a python script that reveals (and then mixes) one row or column of a simplified sudoku puzzle and displays the mathematical probability of a solved puzzle.  My goal for today is to watch and take notes on 3 youtube videos and scan through the zkp wikipedia page.</p>
+		<p>I have written a python script that reveals (and then mixes) one row or column of a simplified sudoku puzzle and displays the mathematical probability of a solved puzzle.  My goal for today is to watch and take notes on 3 youtube videos and scan through the zkp wikipedia page.</p>
 		<a href="https://youtu.be/J3jKROwTPCs" target="_blank">Zero Knowledge Proofs and Their Future Applications (2018)</a>
 		<ul>
 			<li>ZKP use case: any time computations and models benefit from including private information as variables</li>
@@ -126,15 +132,14 @@
 		<p>Key to a complete understanding of this first element of homomorphic encryption lies in the number theory concept of groups and generators, namely the multiplicative group for <em>&#8484<sub>n</sub></em> modulo n: <em>&#8484<sub>n</sub><sup>*</sup></em> (I'll refer to it as G).  <em>|G| = p-1</em> when p is prime; otherwise it is the number of elements in <em>&#8484<sub>n</sub></em> which are coprime with p.</p>
 		<p>I also have come to realize that finding a complete generator given a large prime is a computationally diffictult task; in fact, most generators in DH key-exchange are not complete.  Instead, the trick is to find so-called <em>safe primes</em>, which are primes of the form <em>2q - 1</em> where <em>q</em> is also prime.</p>
 		<p>The next moster to tacke is the concept of encryption through polynomials.  Given some polynomial <em>P</em>, Alice can compute <em>E(P(s))</em> without knowing s, and Bob can get the answer without knowing P.  As for why exactly this is helpful, I have yet to find out!  I'll next turn my attention to The Knowledge of Coefficient Test, which is the next step in the proof.</p>
-		<p>Finally, I now know the requirements to have a secure voting system.  The procol is this:
+		<p>Finally, I now know the requirements to have a secure voting system.  The procol is this:</p>
 		<ul>
 			<li>A voter's encrypted receipt is published publicly</li>
 			<li>A voter can verify the machine's decryption algorithm: the voter will vote several times, get their (now invalid) receipts, jumble them up, and feed them back to the machine to decrypt.</li>
 			<li>Vote buying is impossible, since no one but the machine can decrypt the vote.</li>
 			<li>Multiplying the encrypted votes is the same as adding the unencrypted votes, and so anyone can verify the winner.</li>
 		</ul>
-		Not only is this incredibly cool, but I believe that I'm close to being able to make some python implementation of this relatively soon.  The one part that I can't imagine is the nature of the encryption algorithm... new encryption every time but the properties of the homomorphic hidings are preserved...?
-		</p>
+		<p>Not only is this incredibly cool, but I believe that I'm close to being able to make some python implementation of this relatively soon.  The one part that I can't imagine is the nature of the encryption algorithm... new encryption every time but the properties of the homomorphic hidings are preserved...?</p>
 	</div>
 	<div class="journal-entry">
 		<h2>Day 9</h2>

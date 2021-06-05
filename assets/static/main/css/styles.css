@@ -86,7 +86,6 @@ div:not(.wrapper) {
 	width: 6rem;
 	height: 6rem;
 	box-shadow: 0 0 2pt 1pt white;
-	display: inline-block;
 	vertical-align: middle;
 }
 .contact {
