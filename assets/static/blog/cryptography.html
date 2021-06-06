@@ -65,7 +65,6 @@
 	<p>Since <span class="math inline">\(gcd(m,p \cdot q) = p\)</span>, <span class="math inline">\(gcd(m,q) = 1\)</span>.  Therefore Euler’s theorem tells us that <span class="math display">\[m^{\phi(q)} \equiv 1 \pmod{q}\]</span> <span class="math display">\[m^{q-1} \equiv 1 \pmod{q}\]</span></p>
 	<p>From (2),<span class="math display">\[m^{ed} \equiv m^{1+k \cdot \phi(N)} \pmod{q}\]</span> <span class="math display">\[m^{ed} \equiv m(m^{(q-1)})^{k(p-1)} \pmod{q}\]</span> So, <span class="math inline">\(m^{ed} \equiv m \pmod{q} \)</span>, since <span class="math inline">\(m^{q-1} \equiv 1 \pmod{q}\)</span></p>
 	<p>Finally, a helpful theorem from number theory states that given claim 1 and claim 2, and since <span class="math inline">\(gcd(p,q) = 1\)</span>: <span class="math display">\[m^{ed} \equiv m \pmod{p \cdot q} \tag{3} \]</span></p>
-	<p>(TODO: I need to track down and prove this theorem).</p>
 	<h2>Pivoting to Python</h2>
 	<p>One of the tools we'll need to implement this cryptosystem is a fast method for computing modular exponentiation with very large numbers.  Luckily, python handles large numbers natively, and provides a little-known 3rd argument option to the <code>pow()</code> function that is the modulo.  Still, I wrote my own function to do this, which I rather like.  I won't step through the code in this article, but it can be rather rewarding to reverse engineer the math buried in the code.</p>
 	<pre><code class="lang-python">
@@ -91,7 +90,7 @@ def bign_print(x, name):
 def gen_keys():
 
     # public key
-    (p, q) = gen_large_primes()
+    (p, q) = gen_large_primes(min_bitlen=1024)
     n = p * q
     phin = (p - 1) * (q - 1)
     e = 65537
@@ -137,19 +136,19 @@ def decrypt_message(d,n):
     with open("./msg_decrypted.txt", "w") as f:
         f.write(msg)
 	</code></pre>
-	<p>You may have noticed that there is still one piece of the puzzle missing, which is the mysterious <code>gen_large_primes()</code> function.  All it needs to do is generate some large prime numbers (preferrably &gt; 1024 bytes in length); however, deterministic primality tests are slow, especially for numbers at the scale we're using.  Luckily, the Rabin-Miller test can get us probablistically very close, and fast.  Ironically, the integrity of RSA depends entirely on the computational difficulty of factoring large numbers, but the Rabin-Miller test takes a different approach.</p>
+	<p>You may have noticed that there is still one piece of the puzzle missing, which is the mysterious <code>gen_large_primes()</code> function.  All it needs to do is generate some large prime numbers (preferrably &gt; 1024 bits in length); however, deterministic primality tests are slow, especially for numbers at the scale we're using.  Luckily, the Rabin-Miller test can get us probablistically very close, and fast.  Ironically, the integrity of RSA depends entirely on the computational difficulty of factoring large numbers, but the Rabin-Miller test takes a different approach.</p>
 	<p>Below is my implementation, pulled from the pseudocode on this <a href="https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test" target="_blank">wikipedia page</a>.</p>
 	<pre><code class="lang-python">
-def rabin_miller(n, k):
-    # n &lt; 3
+def rabin_miller(n, s):
+    # n is an odd number greater than 3
+    # i.e. n - 1 = d * 2^r with d odd
     if n % 2 == 0:
         return True
     r, d = 0, n - 1
-		# n - 1 = d * 2^r
     while d % 2 == 0:
         r += 1
         d //= 2
-    for _ in range(k):
+    for _ in range(s):
         a = random.randint(2, n - 2)
         x = pow(a, d, n)
         if x == 1 or x == n - 1:
@@ -162,6 +161,28 @@ def rabin_miller(n, k):
             return False
     return True
 	</code></pre>
+	<p>In this algorithm, we are aiming to prove the primalty of <span class="math inline">\(n\)</span> using security parameter <span class="math inline">\(s\)</span> (the number of rounds to perform the test).  According to <a href="https://stackoverflow.com/questions/6325576/how-many-iterations-of-rabin-miller-should-i-use-for-cryptographic-safe-primes" target="_blank">this Stack Overflow post</a>, the optimal value for <span class="math inline">\(s\)</span> is 40.  Choosing values greater than 40 would achieve greater certainty than is possible for computers due to naturally occurring computation errors.</p>
+	<p>Now we can write our <code>gen_large_primes()</code> function.</p>
+	<pre><code class="lang-python">
+def gen_large_primes(min_bitlen):
+    p = random.getrandbits(random.randint(min_bitlen, min_bitlen*2))
+    q = random.getrandbits(random.randint(min_bitlen, min_bitlen*2))
+    p = p + 1 if p % 2 == 0 else p
+    q = q + 1 if q % 2 == 0 else q
+    while not rabin_miller(p, 40):
+        p = p + 2
+    while not rabin_miller(q, 40):
+        q = q + 2
+	</code></pre>
+	<p>And we're done!  You can find this code along with an "Interactive Mode" that steps through the algorithm on my <a href="https://github.com/bschlaman/rsa-style-cryptosystem" target="_blank">github page</a>.</p>
+	<h3>TODO: Need to add the following proofs to this article:</h3>
+	<ul>
+		<li>Euler's Theorem</li>
+		<li>Modular Transitivity</li>
+		<li>Multiplying Modulo</li>
+		<li>Rabin-Miller Primality Test</li>
+		<li>Optimal Security Parameter for R-M</li>
+	</ul>
 </main>
 <!-- end of wrapper div -->
 </div>
