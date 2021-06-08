@@ -162,6 +162,15 @@ def rabin_miller(n, s):
     return True
 	</code></pre>
 	<p>In this algorithm, we are aiming to prove the primalty of <span class="math inline">\(n\)</span> using security parameter <span class="math inline">\(s\)</span> (the number of rounds to perform the test).  According to <a href="https://stackoverflow.com/questions/6325576/how-many-iterations-of-rabin-miller-should-i-use-for-cryptographic-safe-primes" target="_blank">this Stack Overflow post</a>, the optimal value for <span class="math inline">\(s\)</span> is 40.  Choosing values greater than 40 would achieve greater certainty than is possible for computers due to naturally occurring computation errors.</p>
+	<p>The test hinges on the following theorem:</p>
+	<p>Put <span class="math inline">\(n - 1 = 2^{r} \cdot d\)</span>, with <span class="math inline">\(d\)</span> odd.  If <span class="math inline">\(a^{d} \not\equiv 1 \pmod{n}\)</span> and <span class="math inline">\(a^{2^{j} \cdot d} \not\equiv -1 \pmod{n}\)</span> for all <span class="math inline">\(i = 0, 1, 2, \ldots r - 1\)</span>, for some <span class="math inline">\(a : n \nmid a\)</span>, then <span class="math inline">\(n\)</span> is composite.</p>
+	<p>We can prove the contrapositive relatively easily.</p>
+	<h2>Proof</h2>
+	<p>Let <span class="math inline">\(p\)</span> be an odd prime, and have <span class="math inline">\(p - 1 = 2^{r} \cdot d\)</span>, with <span class="math inline">\(d\)</span> odd.  Consider the set <span class="math display">\[a^{d}, a^{2d}, a^{2^{2}d}, \ldots, a^{2^{j} \cdot d} \pmod{p}\]</span> with <span class="math inline">\(p \nmid a\)</span>.  We must consider 2 cases: <span class="math inline">\(a^{d} = 1\)</span> and <span class="math inline">\(a^{d} \ne 1\)</span>.</p>
+	<h3>Case 1</h3>
+	<p>If <span class="math inline">\(a^{d} = 1\)</span>, we are done, since <span class="math inline">\(a^{d} \not\equiv 1 \pmod{p}\)</span>.</p>
+	<h3>Case 2</h3>
+	<p>TODO</p>
 	<p>Now we can write our <code>gen_large_primes()</code> function.</p>
 	<pre><code class="lang-python">
 def gen_large_primes(min_bitlen):
