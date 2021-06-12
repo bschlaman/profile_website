@@ -29,9 +29,25 @@
 <main>
 	<!-- post -->
 	<div class="blog-post">
-		<h3>My Thoughts on C</h3>
-		<p class="date-time">December 26, 2020</p>
-		<p>Scripting is the meat and potatoes of DevOps, and it's where I feel at ${HOME}.  The toolsets available to scripters like myself have an altogether different set of requirements than other programming languages.  A scripting language should be portable, interpreted, and infinitely extensible.  Runtime performance and memory management are but afterthoughts in scripts which can take hours to complete.  Bash fits the role perfectly, and it's my favorite language.  However, as a firm believer in the Unix philosophy, it was time to put my money where my mouth is.  It's why I chose to write my chess engine in C.</p>
+		<h3>Printing bits in C</h3>
+		<p class="date-time">June 12, 2021</p>
+		<p>While testing out new move generation techniques for my chess engine, I needed a way to print out a variable as a binary representation.  There is no standard C tool for this, but I found a custom solution in <a href="https://stackoverflow.com/questions/111928/is-there-a-printf-converter-to-print-in-binary-format" target="_blank">this StackOverflow post</a> which I thought was awesome and contains some really instructional pointer tricks.</p>
+	<p>Here's the code (slightly modified):</p>
+	<pre><code class="lang-c">
+void printBits(size_t const size, void const * const ptr){
+  unsigned char *b = (unsigned char*) ptr;
+  for(int byte = size - 1; byte &gt;= 0; byte--){
+    for(int bit = 7; bit &gt;= 0; bit--){
+      printf("%u", (b[byte] &gt;&gt; bit) &amp; 1);
+    }
+  }
+  puts("");
+}
+	</code></pre>
+	<p>If you're not used to some of the nuances of C and pointers, it may not be immediately clear what's happening here.  Let's first examine the arguments: <code class="lang-c">size_t const size, void const * const ptr</code>.</p>
+	<p>The first arg is there so that the function knows how long to iterate over the value in memory.  That's because this function accepts a pointer to <em>anything</em>, so it doesn't know where to start unless you tell it.</p>
+	<p>The second arg is the pointer to anything.  At the start of the function, this pointer is cast into an <code class="lang-c">unsigned char*</code> pointer (a pointer to value of size 1 byte).  The reason for this is that C's <code class="lang-c">sizeof</code> function returns sizes in bytes.</p>
+	<p>Now, we simply iterate the pointer through through the size of the variable (assuming little-endianness).  Note that b[size-1], b[size-2], etc. are bytes of the variable.</p>
 	</div>
 	<!-- endpost -->
 	<!-- post -->
@@ -50,6 +66,7 @@
 	<div class="blog-post">
 		<h3>Raspberry Pi, Oh my</h3>
 		<p class="date-time">June 1, 2021</p>
+		<p>Don't host your website on a cloud provider!  Host it ona raspberry pi.  They are more than powerful enough to handle pretty high amounts of traffic.  I've run my website off of a Raspberry Pi Model 3 for many months, and it's taught me more about networking than cloud development ever has.</p>
 	</div>
 	<!-- endpost -->
 	<!-- post -->
@@ -63,6 +80,13 @@
 		<h3>Learning the tools you have</h3>
 		<p class="date-time">June 1, 2021</p>
 		<p>Talk about my talk at BBY</p>
+	</div>
+	<!-- endpost -->
+	<!-- post -->
+	<div class="blog-post">
+		<h3>Why I'm choosing to write my chess engine in C</h3>
+		<p class="date-time">December 26, 2020</p>
+		<p>Scripting is the meat and potatoes of DevOps, and it's where I feel at ${HOME}.  The toolsets available to scripters like myself must meet an altogether different set of requirements than other programming languages.  A scripting language should be portable, interpreted, and infinitely extensible.  Runtime performance and memory management are but afterthoughts in scripts which can take hours to complete.  Bash fits the role perfectly, and it's my favorite language at the moment.  However, disregard for performance and over-reliance on external libraries with hyper-abstracted languages is a huge problem in tech.  I'd like to pay tribute to (arguably) the most important language in computer science history and get at least a few clicks closer to the hardware.</p>
 	</div>
 	<!-- endpost -->
 </main>

@@ -42,6 +42,7 @@ section {
 }
 section p {
 	font-size: 1.4rem;
+	line-height: 1.5;
 }
 section p > a {
 	text-decoration: underline;
@@ -192,6 +193,7 @@ div:not(.wrapper) {
 }
 .hero-about {
 	font-size: 1.2rem;
+	line-height: 1.5;
 }
 .hero img {
 	float: right;
@@ -320,6 +322,8 @@ div:not(.wrapper) {
 .card-bottom p {
 	font-size: 1rem;
 	margin: 0 0 1rem 0;
+	/* adding because I changed line-height for section p */
+	line-height: normal;
 }
 .card-bottom ul {
 	text-align: center;
