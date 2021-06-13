@@ -68,7 +68,7 @@ main p, main ul {
 }
 .blog-post {
 	padding-left: 1rem;
-	margin-bottom: 1rem;
+	margin-bottom: 4rem;
 	border-left: 1px solid var(--transp-black);
 }
 .date-time {
