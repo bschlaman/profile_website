@@ -21,16 +21,16 @@
 <header>
 	<h2>Essays:</h2>
 	<ul>
-		<li><a href="/chess_programming" target="_blank">Chess Programming</a></li>
-		<li><a href="/cryptography" target="_blank">Cryptography</a></li>
-		<li><a href="/zkp" target="_blank">Zero Knowledge Proofs</a></li>
+		<li><a href="/chess_programming">Chess Programming</a></li>
+		<li><a href="/cryptography">Cryptography</a></li>
+		<li><a href="/zkp">Zero Knowledge Proofs</a></li>
 	</ul>
 </header>
 <main>
 	<!-- post -->
 	<div class="blog-post">
 		<h3>Printing bits in C</h3>
-		<p class="date-time">June 12, 2021</p>
+		<p class="date-time">June 13, 2021</p>
 		<p>While testing out new move generation techniques for my chess engine, I needed a way to print out a variable as a binary representation.  There is no standard C tool for this, but I found a custom solution in <a href="https://stackoverflow.com/questions/111928/is-there-a-printf-converter-to-print-in-binary-format" target="_blank">this StackOverflow post</a> which I thought was awesome and contains some really instructional pointer tricks.</p>
 	<p>Here's the code (slightly modified):</p>
 	<pre><code class="lang-c">
@@ -47,7 +47,57 @@ void printBits(size_t const size, void const * const ptr){
 	<p>If you're not used to some of the nuances of C and pointers, it may not be immediately clear what's happening here.  Let's first examine the arguments: <code class="lang-c">size_t const size, void const * const ptr</code>.</p>
 	<p>The first arg is there so that the function knows how long to iterate over the value in memory.  That's because this function accepts a pointer to <em>anything</em>, so it doesn't know where to start unless you tell it.</p>
 	<p>The second arg is the pointer to anything.  At the start of the function, this pointer is cast into an <code class="lang-c">unsigned char*</code> pointer (a pointer to value of size 1 byte).  The reason for this is that C's <code class="lang-c">sizeof</code> function returns sizes in bytes.</p>
-	<p>Now, we simply iterate the pointer through through the size of the variable (assuming little-endianness).  Note that b[size-1], b[size-2], etc. are bytes of the variable.</p>
+	<p>Now, we simply iterate the pointer through through the size of the variable (assuming little-endianness).  Note that b[size-1], b[size-2], etc. are the 1st, 2nd, etc. bytes comprising the variable.</p>
+	</div>
+	<!-- endpost -->
+	<!-- post -->
+	<div class="blog-post">
+		<h3>Raspberry Pi, Oh my</h3>
+		<p class="date-time">June 13, 2021</p>
+		<p>Among the most essential tools in my tech learning journey has been my Raspberry Pis, and I <em>highly</em> recommend purchasing one to anyone interested in computing, networking, self-hosting, linux, etc.  I purchased a Raspberry Pi Model 3 back in 2016, intending to use it to learn about circuitry and microcontrollers.  At the time, I was a novice programmer and didn't quite know where to start with the Pi, so it sat on the shelf for a number of years.  It wasn't until I began to learn computing professionally in 2018 that I began to understand how powerful the Pi really was.</p>
+		<p>Around this time, I began to connect the dots on how computers and the internet <em>really</em> worked.  Navigating to a website, I realized, is nothing but one computer looking up an internet address, making a request, and being returned the string of data necessary to render a local copy of that website in a local browser.  The "eureka" moment came when I realized that there's nothing special about webservers - they're just computers like my laptop or Raspberry Pi.</p>
+		<p>I quickly began researching how to turn my Raspberry Pi into a webserver.  In parallel, I was developing a passion for Linux, so it wasn't long before I got Raspian (Debian based OS from the Raspberry Pi Foundation) running on my Pi.  The first time I established an SSH connection from my laptop to the Pi was like magic.</p>
+		<p>After tinkering around with Apache, port forwarding, and letsencrypt, I had my website up and running on my Pi and accessible from the public internet.  I can't begin to explain how much this exercise accelerated my abilities as a technologist and engineer.</p>
+		<p>Since then, I've added a Raspberry Pi 4 (4Gb model) and a Raspberry Pi Zero-W to my collection, although the Zero-W stopped working suddenly.  Nowadays, I use my Pis primarily as jump boxes and development environments.  I can access my home network and files from anywhere in the world, and I never have to worry about emailing files to myself or using external storage to transfer data between my many computers.  Over the years, I've swapped out Raspbian for Arch Linux and Apache out for alternatives like NodeJS and Go, but my enthusiasm for the Raspberry Pi Foundation and their little computers has never waned.</p>
+		<p>Some fantastic projects that every software developer / DevOps engineer / sys admin will benefit from are:</p>
+		<ul>
+			<li>Host a secure site on a RPi with a backend and database</li>
+			<li>Turn your RPis into a Kubernetes Cluster</li>
+			<li>Administer your RPis with Ansible</li>
+			<li>Use Pi-Hole to block ads and trackers in your home network</li>
+		</ul>
+	</div>
+	<!-- endpost -->
+	<!-- post -->
+	<div class="blog-post">
+		<h3>On "Which Linux Distro is Best"</h3>
+		<p class="date-time">June 12, 2021</p>
+		<p>The Linux community is never void of controversy - from Systemd to codes of conduct to the very founder of Linux himself.  Some of these contentious topics can be damaging to the proliferation of Linux; however, the age-old debate around "which distro is best" is one that I rather enjoy, and I think it actually brings some excitement and friendly competition to a arguably ostensibly boring topic like operating systems.  My thoughts:</p>
+		<ol>
+			<li>Friendly competition aside, distros don't matter.  Linux of any flavor is better than anything that is not Linux.  If you are helping someone set up or fix their computer, give them Ubuntu or Linux Mint.</li>
+			<li>I think Arch Linux is the best distribution because of its minimalism and documentation.  If you are a power user or software engineer, you should install Arch Linux at least once, even if you don't end up using it on your machines.  If you haven't installed it before, you WILL learn something new that will make you a better technologist.</li>
+			<li>For servers, you should use a stock Debian LTS version or Arch Linux.  These distributions are bare-bones, so you can be confident that the only userland programs running on your server (aside from essential OS background tasks) are the ones you installed and started.  If Ubuntu Server has additional features that secure your system, but you have no idea what they are or what they do, is your system really more secure?</li>
+		</ol>
+	</div>
+	<!-- endpost -->
+	<!-- post -->
+	<div class="blog-post">
+		<h3>Learning the tools you have</h3>
+		<p class="date-time">June 1, 2021</p>
+		<p>A disappointing side affect of cramming more and more memory and compute power into smaller spaces is that we've forgotten how to write efficient, graceful, and parsimonious code.  Modern code is highly abstracted from the hardware it runs on, and to call performance a 2nd class citizen to business logic would be giving it too much credit.   Software development has become so business oriented that so-called "low code" and "no code" solutions are beginning to dominate the market.</p>
+		<p>I've worked with developers who consider themselves full-stack but couldn't set up a simple static website or SSH into a server.  Just recently, a developer had sent me an email asking me how to install "git bash" on their Mac computer.  A <em>developer</em>!</p>
+		<p>It's hard for me to say what's causing this.  Some might be quick to place the blame at the feet of project managers, and I do think they share some of the fault here.  Many managers claim to be technical because they heard the word "containerization" in a seminar and now use it in conversations.  These managers have 0 concerns outside of business logic, and they will not allocate time for learning, refactoring, or thinking through tough architectural decisions.  However, ultimately, I think the blame lies mostly with developers.  Faux-technical managers have always been around and will persist for the rest of time.  But there is no excuse as a technologist to not learn about the operating system and supporting software that runs your code.  Most developers I've interacted with write their code, press the green button on a Jenkins job, and then by some magical force, their app is running at the testing environment URL.  If something goes wrong in that pipeline, they are completely helpless, and so they screenshot the error (no matter how trivial) and send it to me.</p>
+		<p>To course correct, I call upon all developers to learn the tools that are available to you on your Mac or Linux system.  Learn basic utilities like grep, sed, diff, tail, and curl.  Write code as if it's going to be around long after you're gone.  <em>Write code on underpowered hardware</em>!  Together we can fight the bloat and feature creep that plagues all corners of modern tech.</p>
+	</div>
+	<!-- endpost -->
+	<!-- post -->
+	<div class="blog-post">
+		<h3>Doge</h3>
+		<p class="date-time">June 1, 2021</p>
+		<p>Ever a skeptic of pop culture and pop tech, I'm almost surprised that I got swept up in the Doge pseudo-movement.  I was a middle-adopter, jumping on the bandwagon somewhere around 4/13 (or $0.11 depending on your preferred unit of Doge history).  The first night was addictive.  With one hand clutching a beer and the other dedicated to hitting "refresh" on the Dogecoin subreddit, I watched my position climb as my margins quickly passed the amount of money I had earned that same day at work, seemingly <em>out of nowhere</em>.</p>
+		<p>After an emotional night, I awoke the next day to find my portfolio had grown even larger, and at this point, I was hooked.  Work meetings?  Ah yes, those annoying times when I have to look away from the Doge ticker.  Having sat out the GameStop fiasco, I relished in the feedback loop recursing on the Dogecoin subreddit - I had never seen anything quite like it.  Everyone was winning, everyone was having a blast.  That is, until 4/20.</p>
+		<p>It turns out that with what is essentially a zero-sum coin, showing your hand is never a good idea.  In order for someone to win at Dogecoin, someone else has to lose.  This sentiment was heresy in the Dogecoin subreddit, and so it's no surprise that the coin crashed on what was supposed to be it's finest day.  I lost almost every gain that had given so much joy for the past week.  Several days later, as the coin began to rise again, I jumped back in, promising myself that this time, I would not succumb to the natural tides of growth.  I dawned my iron gloves and "hodled" my way to $0.72 where I sold to pull in a decent profit for myself.  I'd love to say that I knew I was selling at the perfect time, but of course that's nonsense.</p>
+		<p>Many people were hurt by Dogecoin's 15 min of fame.  I consider my success to be almost entirely luck, and despite the high I felt for a week, I'm not sure I'm cut out for day trading.</p>
 	</div>
 	<!-- endpost -->
 	<!-- post -->
@@ -60,26 +110,6 @@ void printBits(size_t const size, void const * const ptr){
 			<li>Keep a list of pinned pieces and treat their move options differently</li>
 		</ul>
 		<p>Both methods yielded similar perft results, neither of which were very good.  I need to refactor my legal move generation and make this process far more efficient.</p>
-	</div>
-	<!-- endpost -->
-	<!-- post -->
-	<div class="blog-post">
-		<h3>Raspberry Pi, Oh my</h3>
-		<p class="date-time">June 1, 2021</p>
-		<p>Don't host your website on a cloud provider!  Host it ona raspberry pi.  They are more than powerful enough to handle pretty high amounts of traffic.  I've run my website off of a Raspberry Pi Model 3 for many months, and it's taught me more about networking than cloud development ever has.</p>
-	</div>
-	<!-- endpost -->
-	<!-- post -->
-	<div class="blog-post">
-		<h3>Doge</h3>
-		<p class="date-time">June 1, 2021</p>
-	</div>
-	<!-- endpost -->
-	<!-- post -->
-	<div class="blog-post">
-		<h3>Learning the tools you have</h3>
-		<p class="date-time">June 1, 2021</p>
-		<p>Talk about my talk at BBY</p>
 	</div>
 	<!-- endpost -->
 	<!-- post -->
