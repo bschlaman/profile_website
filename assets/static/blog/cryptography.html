@@ -56,7 +56,7 @@
 		<li><strong>Case 2:</strong> <span class="math inline">\(gcd(m,n) \ne 1\)</span></li>
 	</ul>
 	<h3>Case 1</h3>
-	<p>Case 1 follows directly from Euler’s formula, which states that <span class="math inline">\(m^{\phi(N)} \equiv 1 \pmod{N}\)</span>.</p>
+	<p>Case 1 follows directly from Euler's formula, which states that <span class="math inline">\(m^{\phi(N)} \equiv 1 \pmod{N}\)</span>.</p>
 	<h3>Case 2</h3>
 	<p>Case 2 is more involved, which is ironic considering that the only time we’d face it is in the case that <span class="math inline">\(m\)</span> is exactly <span class="math inline">\(p\)</span> or <span class="math inline">\(q\)</span>.  Since <span class="math inline">\(m\)</span> is taken to be strictly less than <span class="math inline">\(N\)</span>, if <span class="math inline">\(gcd(m, p \cdot q) \ne 1\)</span>, then <span class="math inline">\(gcd(m, p \cdot q) = p\)</span> or <span class="math inline">\(q\)</span>.  We’ll prove the case for <span class="math inline">\(p\)</span>, and by symmetry it will be proven for <span class="math inline">\(q\)</span>.  First, we claim that <span class="math inline">\(m^{ed} \equiv m \pmod{p}\)</span> and <span class="math inline">\(m^{ed} \equiv m \pmod{q}\)</span>.</p>
 	<p><em>Claim 1:</em></p>
@@ -64,9 +64,9 @@
 	<p><em>Claim 2:</em></p>
 	<p>Since <span class="math inline">\(gcd(m,p \cdot q) = p\)</span>, <span class="math inline">\(gcd(m,q) = 1\)</span>.  Therefore Euler’s theorem tells us that <span class="math display">\[m^{\phi(q)} \equiv 1 \pmod{q}\]</span> <span class="math display">\[m^{q-1} \equiv 1 \pmod{q}\]</span></p>
 	<p>From (2),<span class="math display">\[m^{ed} \equiv m^{1+k \cdot \phi(N)} \pmod{q}\]</span> <span class="math display">\[m^{ed} \equiv m(m^{(q-1)})^{k(p-1)} \pmod{q}\]</span> So, <span class="math inline">\(m^{ed} \equiv m \pmod{q} \)</span>, since <span class="math inline">\(m^{q-1} \equiv 1 \pmod{q}\)</span></p>
-	<p>Finally, a helpful theorem from number theory states that given claim 1 and claim 2, and since <span class="math inline">\(gcd(p,q) = 1\)</span>: <span class="math display">\[m^{ed} \equiv m \pmod{p \cdot q} \tag{3} \]</span></p>
+	<p>Finally, we turn to the Constant-Case Chinese Remainder Theorem, which states that given coprime <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>, <span class="math display">\[p,q \mid x - a \iff pq \mid x - a\]</span> Fortunately, the Constant-Case Chinese Remainder Theorem can be proven in 1 line (below proof is the forward direction; the reverse direction is trivial). Following from Euclid’s Lemma, <span class="math display">\[p \mid nq = x - a \implies p \mid n \implies pq \mid nq = x - a\]</span> So, since <span class="math inline">\(m^{ed} \equiv m \pmod{p}\)</span> and <span class="math inline">\(m^{ed} \equiv m \pmod{q}\)</span> (claim 1 and 2), <span class="math display">\[m^{ed} \equiv m \pmod{p \cdot q} \tag{3} \]</span></p>
 	<h2>Pivoting to Python</h2>
-	<p>One of the tools we'll need to implement this cryptosystem is a fast method for computing modular exponentiation with very large numbers.  Luckily, python handles large numbers natively, and provides a little-known 3rd argument option to the <code>pow()</code> function that is the modulo.  Still, I wrote my own function to do this, which I rather like.  I won't step through the code in this article, but it can be rather rewarding to reverse engineer the math buried in the code.</p>
+	<p>One of the tools we'll neeed to implement this cryptosystem is a fast method for computing modular exponentiation with very large numbers.  Luckily, python handles large numbers natively, and provides a little-known 3rd argument option to the <code>pow()</code> function that is the modulo.  Still, I wrote my own function to do this, which I rather like.  I won't step through the code in this article, but it can be rather rewarding to reverse engineer the math buried in the code.</p>
 	<pre><code class="lang-python">
 def large_mod(a,x,p):
     pwr2 = {1:a%p}
@@ -188,7 +188,7 @@ def gen_large_primes(min_bitlen):
 	<ul>
 		<li>Euler's Theorem</li>
 		<li>Modular Transitivity</li>
-		<li>Multiplying Modulo</li>
+		<li>Euclid's Lemma</li>
 		<li>Rabin-Miller Primality Test</li>
 		<li>Optimal Security Parameter for R-M</li>
 	</ul>
