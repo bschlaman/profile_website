@@ -231,6 +231,10 @@ section p > a {
 */
 
 /* projects section */
+.project-wrapper .h3-plus-icon {
+	/* prevent wrapping of inline-block elements */
+	white-space: nowrap;
+}
 .project-wrapper .h3-plus-icon h3 {
 	display: inline-block;
 	vertical-align: middle;
@@ -448,17 +452,26 @@ section p > a {
 	}
 }
 @media screen and (min-width: 992px) and (max-width: 1199px) {
+	.nav-bar ul {
+		display: none;
+	}
 	.cards-wrapper {
 		/* TODO: find a better strategy for this */
 		width: 70rem;
 		/* section width: 50 */
 		transform: translateX(-10rem);
 	}
+}
+@media screen and (min-width: 577px) and (max-width: 991px) {
 	.nav-bar ul {
 		display: none;
 	}
-}
-@media screen and (min-width: 577px) and (max-width: 991px) {
+	.nav-bar img {
+		display: none;
+	}
+	.contact {
+		margin-left: 0;
+	}
 	.hero {
 		margin: 2rem auto 0 auto;
 	}
@@ -471,6 +484,11 @@ section p > a {
 		float: none;
 		margin: 2rem auto 1rem auto;
 	}
+	.flex-break {
+		display: none;
+	}
+}
+@media screen and (max-width: 576px) {
 	.nav-bar ul {
 		display: none;
 	}
@@ -479,9 +497,8 @@ section p > a {
 	}
 	.contact {
 		margin-left: 0;
+		margin-right: 1rem;
 	}
-}
-@media screen and (max-width: 576px) {
 	.hero {
 		margin: 2rem auto 0 auto;
 	}
@@ -504,14 +521,7 @@ section p > a {
 	.hero-desc::after {
 		display: none;
 	}
-	.nav-bar ul {
+	.flex-break {
 		display: none;
-	}
-	.nav-bar img {
-		display: none;
-	}
-	.contact {
-		margin-left: 0;
-		margin-right: 1rem;
 	}
 }
