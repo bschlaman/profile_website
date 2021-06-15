@@ -231,9 +231,17 @@ section p > a {
 */
 
 /* projects section */
-.project-wrapper p {
-/*	font-size: 1rem;*/
+.project-wrapper .h3-plus-icon h3 {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 1rem;
 }
+.project-wrapper .h3-plus-icon img {
+	width: 3rem;
+	vertical-align: middle;
+}
+
+/* chessboard section */
 .chessboard-wrapper {
 	width: 32rem;
 	margin: auto;
