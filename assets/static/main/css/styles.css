@@ -40,22 +40,24 @@ section {
 	width: min(90%, var(--max-width));
 	margin: 0 auto 9rem auto;
 }
+section h2 {
+	font-size: 2.2rem;
+}
+section h3 {
+	font-size: 1.4rem;
+}
 section p {
 	font-size: 1.4rem;
 	line-height: 1.5;
 }
 section p > a {
 	text-decoration: underline;
+	color: var(--color3);
 }
 /* workaround for weirdness */
 /* TODO: better way? */
 .wrapper {
 	overflow-x: hidden;
-}
-
-/* wire-framing */
-div:not(.wrapper) {
-/*	border: 1px solid black;*/
 }
 
 /*
@@ -67,6 +69,7 @@ div:not(.wrapper) {
 	position: fixed;
 	bottom: 2rem;
 	right: 2rem;
+	color: var(--color3);
 }
 
 /* nav bar */
@@ -161,15 +164,17 @@ div:not(.wrapper) {
 }
 .hero-intro {
 	display: inline-block;
-	width: 26rem;
+	width: min(26rem, 90%);
 }
 .hero-intro h1 {
 	margin: 1rem 0 0 4rem;
+	text-align: center;
 }
 .hero-desc {
 	position: relative;
 	font-size: 1rem;
 	margin: 0 0 2.5rem 3rem;
+	text-align: center;
 }
 .hero-desc::before {
 	content: "";
@@ -282,10 +287,6 @@ div:not(.wrapper) {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	/* TODO: find a better strategy for this */
-	width: 70rem;
-	/* section width: 50 */
-	transform: translateX(-10rem);
 }
 .card {
 	height: 23rem;
@@ -367,6 +368,18 @@ div:not(.wrapper) {
 	font-size: 1rem;
 }
 
+/* blog section */
+.blog-section ul {
+	font-size: 1.4rem;
+}
+.blog-section ul li {
+	margin-bottom: 0.3rem;
+}
+.blog-section li > a {
+	color: var(--color3);
+}
+
+
 /* contact section */
 .contact-form-wrapper {
 	margin: 0 auto;
@@ -419,25 +432,78 @@ div:not(.wrapper) {
 
 /* responsive */
 @media screen and (min-width: 1200px){
+	.cards-wrapper {
+		/* TODO: find a better strategy for this */
+		width: 70rem;
+		/* section width: 50 */
+		transform: translateX(-10rem);
+	}
 }
 @media screen and (min-width: 992px) and (max-width: 1199px) {
+	.cards-wrapper {
+		/* TODO: find a better strategy for this */
+		width: 70rem;
+		/* section width: 50 */
+		transform: translateX(-10rem);
+	}
 	.nav-bar ul {
 		display: none;
 	}
 }
 @media screen and (min-width: 577px) and (max-width: 991px) {
+	.hero {
+		margin: 2rem auto 0 auto;
+	}
+	.hero-intro {
+		display: block;
+		margin: 0 auto;
+	}
+	.hero img {
+		display: block;
+		float: none;
+		margin: 2rem auto 1rem auto;
+	}
 	.nav-bar ul {
 		display: none;
 	}
 	.nav-bar img {
 		display: none;
+	}
+	.contact {
+		margin-left: 0;
 	}
 }
 @media screen and (max-width: 576px) {
+	.hero {
+		margin: 2rem auto 0 auto;
+	}
+	.hero-intro {
+		display: block;
+		margin: 0 auto;
+	}
+	.hero img {
+		display: block;
+		float: none;
+		margin: 2rem auto 1rem auto;
+	}
+	.hero-intro h1 {
+		margin: 1rem 0 0 0;
+	}
+	.hero-desc {
+		margin: 0 0 2.5rem 0;
+	}
+	.hero-desc::before,
+	.hero-desc::after {
+		display: none;
+	}
 	.nav-bar ul {
 		display: none;
 	}
 	.nav-bar img {
 		display: none;
+	}
+	.contact {
+		margin-left: 0;
+		margin-right: 1rem;
 	}
 }
