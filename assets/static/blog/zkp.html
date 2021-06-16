@@ -33,18 +33,19 @@
 	</ul>
 </header>
 <main>
-	<p>The following documents my notes from researching Zero Knowledge Proofs in Fall of 2019.</p>
+	<p>The following documents my notes from researching Zero Knowledge Proofs in Fall of 2019.  The output from this learning is a proof-of-concept voting system that uses ZKP (mainly ElGamal Encryption techniques) to allow for the tallying of votes without knowledge of the individual vote values.  You can check out the source code below.</p>
+	<p><a href="https://github.com/bschlaman/zkvoting" target="_blank">ZKVoting</a></p>
 	<div class="journal-entry">
 		<h2>Day 1</h2>
 		<p class="date-time">Sun Aug 11 20:00:22 UTC 2019</p>
 		<p>I have written a python script that reveals (and then mixes) one row or column of a simplified sudoku puzzle and displays the mathematical probability of a solved puzzle.  My goal for today is to watch and take notes on 3 youtube videos and scan through the zkp wikipedia page.</p>
-		<a href="https://youtu.be/J3jKROwTPCs" target="_blank">Zero Knowledge Proofs and Their Future Applications (2018)</a>
+		<p><a href="https://youtu.be/J3jKROwTPCs" target="_blank">Zero Knowledge Proofs and Their Future Applications (2018)</a></p>
 		<ul>
 			<li>ZKP use case: any time computations and models benefit from including private information as variables</li>
 			<li>Private Computation is different that Private Communication</li>
 			<li>Any function f can be computed privately</li>
 		</ul>
-		<a href="https://www.youtube.com/watch?v=ZP1tTXWfxZI" target="_blank">Zero Knowledge Proofs and Smart Contracts with Bulletproofs</a>
+		<p><a href="https://www.youtube.com/watch?v=ZP1tTXWfxZI" target="_blank">Zero Knowledge Proofs and Smart Contracts with Bulletproofs</a></p>
 		<ul>
 			<li>Properties of a ZKP
 				<ul>
@@ -60,7 +61,7 @@
 				</ul>
 			</li>
 		</ul>
-		<a href="https://youtu.be/jr95o_k_SwI" target="_blank">Introduction to SNARKs</a>
+		<p><a href="https://youtu.be/jr95o_k_SwI" target="_blank">Introduction to SNARKs</a></p>
 		<ul>
 			<li>Using polynomials in a zkp protocol detects errors</li>
 			<li>ZK is achieved through encrypting the verifiers secret evaluation polynomial evaluation point</li>
@@ -144,7 +145,7 @@
 	<div class="journal-entry">
 		<h2>Day 9</h2>
 		<p class="date-time">Fri 27 Sep 2019 09:56:10 PM UTC</p>
-		<p>Today, I browsed through the remaining learning sections on zk-SNARKS.  The concepts grow increasingly complex to ensure all letters in SNARKS are adered to.  The latter sections rely heavily on Finite Fields, which is another rabbit hole I need to fall down soon.  Since my goal is to make a simple voting protocol, I think that I should look elsewhere for the moment.  I found <a href="https://www.boazbarak.org/cs127/Projects/voting.pdf">this</a> paper which describes a seemingly simple enough encryption algorithm called El Gamal Encryption.  This allows voters to encrpyt a "0" or "1" with a private key generated with a public key provided by some election committee.  Tomorrow I'll try to get this algorithm up and running.</p>
+		<p>Today, I browsed through the remaining learning sections on zk-SNARKS.  The concepts grow increasingly complex to ensure all letters in SNARKS are adered to.  The latter sections rely heavily on Finite Fields, which is another rabbit hole I need to fall down soon.  Since my goal is to make a simple voting protocol, I think that I should look elsewhere for the moment.  I found <a href="https://www.boazbarak.org/cs127/Projects/voting.pdf">this</a> paper which describes a seemingly simple enough encryption algorithm called ElGamal Encryption.  This allows voters to encrpyt a "0" or "1" with a private key generated with a public key provided by some election committee.  Tomorrow I'll try to get this algorithm up and running.</p>
 	</div>
 	<div class="journal-entry">
 		<h2>Day 10</h2>

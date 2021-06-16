@@ -59,6 +59,9 @@ section p > a {
 .wrapper {
 	overflow-x: hidden;
 }
+.nowrap {
+	white-space: nowrap;
+}
 
 /*
 	### CONTENT
@@ -167,7 +170,7 @@ section p > a {
 	width: min(26rem, 90%);
 }
 .hero-intro h1 {
-	margin: 1rem 0 0 4rem;
+	margin: 1rem 0 0 3rem;
 	text-align: center;
 }
 .hero-desc {

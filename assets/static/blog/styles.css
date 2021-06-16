@@ -43,6 +43,7 @@ p > code {
 	border-radius: 3px;
 	padding: 2px;
 	font-size: 1rem;
+	white-space: nowrap;
 }
 .hljs {
 	border-radius: 3px;
@@ -95,6 +96,9 @@ li > a {
 }
 .intro .name {
 	display: inline-block;
+}
+main p > a {
+	color: var(--color3);
 }
 
 /* zkp */
