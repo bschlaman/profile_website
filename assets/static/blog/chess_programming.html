@@ -80,13 +80,15 @@ for(int i = 0; i &lt; 0xBC + 4; i++){
 - - - - - - - - - - - - - - - -
 - - - - - - - - - - - - - - - -
 		</code></pre>
-		<p>The problem with printing out a board with A1 in the lower left corner is that the for loop will print starting at the top.  I therefore introduce the <code>invertRows</code> function that assumes a 12x16 board layout and converts an index to its corresponding index mirrored across the y axis.</p>
+		<p>The problem with printing out a board with A1 in the lower left corner is that the for loop will print starting at the top.  I therefore introduce the <code>invertRows</code> function that assumes a 16x12 board layout and converts an index to its corresponding index mirrored across the y axis.</p>
 		<p>A few lines at the end of the <code>delta_init</code> function reveal the purpose of the extra 0x77:</p>
 		<pre><code class="lang-c">
 delta_vec[y+=k] = k;
 if(j) capt_code[y] = m;
 		</code></pre>
 		<p>The memory addresses dedicated to <code>capt_code</code> are indexed by offsets between squares.  0x77 is the distance between the first and last squares (34 and 153), so the indices can be as low as -0x77 and as high as 0x77.  If you include the 0 index, this leaves a total of 0x77 * 2 + 1 = 0xEF addresses.  The same amount of memory is allocated for <code>delta_vec</code>, since the total size of brd is <code>brd[0xBC+2*0xEF+1]</code>.</p>
+		<p>The next step is to print out <code>capt_code</code> and <code>delta_vec</code>.  First we initialize them like in the <code>delta_init</code> function, and then print the boards similarly to the game board above.</p>
+		<p>TODO: complete this printout</p>
 </main>
 <!-- end of wrapper div -->
 </div>

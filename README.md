@@ -12,4 +12,4 @@ Note that currently in the build process, `npm install` does nothing, since `$RO
  - blog
 
 ## TODO
- - make inline code not wrap
+ - prevent inline code from wrapping
