@@ -34,11 +34,32 @@
 <main>
 	<!-- post -->
 	<div class="blog-post">
+		<h3>A nice python problem</h3>
+		<p class="date-time">July 2, 2021</p>
+		<p>In working through some LeetCode problems, I cam across one that I really enjoy.  The problem can be found <a href="https://leetcode.com/problems/container-with-most-water/" target="_blank">here</a>.</p>
+		<p>Given <em>n</em> non-negative integers <code>a<sub>1</sub>, a<sub>2</sub>, ..., a<sub>n</sub></code>, where each represents a point at coordinate <code>(i, ai)</code>. <em>n</em> vertical lines are drawn such that the two endpoints of the line i is at <code>(i, ai)</code> and <code>(i, 0)</code>. Find two lines, which, together with the x-axis forms a container, such that the container contains the most water.</p>
+		<img src="/media/container_problem.jpg"/>
+		<p>The canonical solution has <em>O(n<sup>2</sup>)</em> time complexity, which is too slow.</p>
+		<pre><code class="lang-python">
+def maxArea(self, height: list[int]) -&gt; int:
+    areas = []
+    for i in range(len(height)):
+        for j in range(i+1, len(height)):
+            areas.append(self.get_area((i,height[i]),(j,height[j])))
+    return max(areas)
+def get_area(self, point1, point2):
+    return abs(point1[0] - point2[0]) * min(point1[1], point2[1])
+		</code></pre>
+		<p>A more clever solution is required - one that can achieve <em>O(n)</em> time complexity.</p>
+	</div>
+	<!-- endpost -->
+	<!-- post -->
+	<div class="blog-post">
 		<h3>Printing Bits in C</h3>
 		<p class="date-time">June 13, 2021</p>
 		<p>While testing out new move generation techniques for my chess engine, I needed a way to print out a variable as a binary representation.  There is no standard C tool for this, but I found a custom solution in <a href="https://stackoverflow.com/questions/111928/is-there-a-printf-converter-to-print-in-binary-format" target="_blank">this StackOverflow post</a> which I thought was awesome and contains some really instructional pointer tricks.</p>
-	<p>Here's the code (slightly modified):</p>
-	<pre><code class="lang-c">
+		<p>Here's the code (slightly modified):</p>
+		<pre><code class="lang-c">
 void printBits(size_t const size, void const * const ptr){
   unsigned char *b = (unsigned char*) ptr;
   for(int byte = size - 1; byte &gt;= 0; byte--){
@@ -48,11 +69,11 @@ void printBits(size_t const size, void const * const ptr){
   }
   puts("");
 }
-	</code></pre>
-	<p>If you're not used to some of the nuances of C and pointers, it may not be immediately clear what's happening here.  Let's first examine the arguments: <code class="lang-c">size_t const size, void const * const ptr</code>.</p>
-	<p>The first arg is there so that the function knows how long to iterate over the value in memory.  That's because this function accepts a pointer to <em>anything</em>, so it doesn't know where to start unless you tell it.</p>
-	<p>The second arg is the pointer to anything.  At the start of the function, this pointer is cast into an <code class="lang-c">unsigned char*</code> pointer (a pointer to value of size 1 byte).  The reason for this is that C's <code class="lang-c">sizeof</code> function returns sizes in bytes.</p>
-	<p>Now, we simply iterate the pointer through through the size of the variable (assuming little-endianness).  Note that b[size-1], b[size-2], etc. are the 1st, 2nd, etc. bytes comprising the variable.</p>
+		</code></pre>
+		<p>If you're not used to some of the nuances of C and pointers, it may not be immediately clear what's happening here.  Let's first examine the arguments: <code class="lang-c">size_t const size, void const * const ptr</code>.</p>
+		<p>The first arg is there so that the function knows how long to iterate over the value in memory.  That's because this function accepts a pointer to <em>anything</em>, so it doesn't know where to start unless you tell it.</p>
+		<p>The second arg is the pointer to anything.  At the start of the function, this pointer is cast into an <code class="lang-c">unsigned char*</code> pointer (a pointer to value of size 1 byte).  The reason for this is that C's <code class="lang-c">sizeof</code> function returns sizes in bytes.</p>
+		<p>Now, we simply iterate the pointer through through the size of the variable (assuming little-endianness).  Note that b[size-1], b[size-2], etc. are the 1st, 2nd, etc. bytes comprising the variable.</p>
 	</div>
 	<!-- endpost -->
 	<!-- post -->
