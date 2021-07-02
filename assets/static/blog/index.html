@@ -50,7 +50,21 @@ def maxArea(self, height: list[int]) -&gt; int:
 def get_area(self, point1, point2):
     return abs(point1[0] - point2[0]) * min(point1[1], point2[1])
 		</code></pre>
-		<p>A more clever solution is required - one that can achieve <em>O(n)</em> time complexity.</p>
+		<p>A more clever solution is required - one that can achieve <em>O(n)</em> time complexity.  The key idea is to start at the ends of the array and work your way inwards on the side with the shorter height.</p>
+		<pre><code class="lang-python">
+def maxArea(self, height: list[int]) -&gt; int:
+    record = 0
+    l, r = 0, len(height) - 1
+    right = len(height) - 1
+    for width in range(r, 0, -1):
+        if height[l] &lt; height[r]:
+            record = max(record, width * height[l])
+            l += 1
+        else:
+            record = max(record, width * height[r])
+            r -= 1
+    return record
+		</code></pre>
 	</div>
 	<!-- endpost -->
 	<!-- post -->
