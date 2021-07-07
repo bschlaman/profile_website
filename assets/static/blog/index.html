@@ -34,6 +34,50 @@
 <main>
 	<!-- post -->
 	<div class="blog-post">
+		<h3>Algorithmic idea: finding the sum of k terms</h3>
+		<p class="date-time">July 6, 2021</p>
+		<p>Another interesting subset of problems I've found on leetcode is arount finding <em>k</em> distict elements in an array that sum to a particular target value.</p>
+		<p>The problems starting looking for 2 elements, then indroduced 3, and finally 4.  This pattern, can of course, be generalized to <em>k</em> elements.  The idea is to first sort the array, simplify the problem down to the 2 case, and then use left and right pointers to narrow in on the target.  The two case is rather simple:</p>
+		<pre><code class="lang-python">
+def two_sum(self, nums, target):
+    nums.sort()
+    res = []
+    l, r = 0, len(nums) - 1
+    while l &lt; r:
+        s = nums[l] + nums[r]
+        # to avoid duplicate solutions, skip over duplicate values
+        if s &lt; target or (l &gt; 0 and nums[l] == nums[l-1]):
+            l += 1
+        elif s &gt; target or (r &lt; len(nums) - 1 and nums[r] == nums[r+1]):
+            r -= 1
+        else:
+            res.append([nums[l], nums[r]])
+            r -= 1
+            l += 1
+    return res
+		</code></pre>
+		<p>The <em>k - 2</em> cases can be handled with a bit of clever recursion, searching now for <code>target - nums[i]</code>:</p>
+		<pre><code class="lang-python">
+def k_sum(self, nums, target, k):
+    res = []
+		# taking care of a few edge cases
+    if len(nums) == 0 or nums[0] * k &gt; target or target &gt; nums[-1] * k:
+        return res
+    if k == 2:
+        return self.two_sum(nums, target)
+    for i in range(len(nums) - k + 1):
+        # avoiding duplicates by skipping over same values
+        if i &gt; 0 and nums[i] == nums[i-1]:
+            continue
+        for x in self.k_sum(nums[i+1:], target - nums[i], k - 1):
+            res.append([nums[i]] + x)
+    return res
+		</code></pre>
+		<p>All that's left is to call <code>nums.sort()</code> and you're good to go!</p>
+	</div>
+	<!-- endpost -->
+	<!-- post -->
+	<div class="blog-post">
 		<h3>A nice python problem</h3>
 		<p class="date-time">July 2, 2021</p>
 		<p>In working through some LeetCode problems, I cam across one that I really enjoy.  The problem can be found <a href="https://leetcode.com/problems/container-with-most-water/" target="_blank">here</a>.</p>
