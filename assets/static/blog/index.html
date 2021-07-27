@@ -47,41 +47,6 @@ def kgroup():
 	<!-- endpost -->
 	<!-- post -->
 	<div class="blog-post">
-		<h3>A nice python problem</h3>
-		<p class="date-time">July 2, 2021</p>
-		<p>In working through some LeetCode problems, I cam across one that I really enjoy.  The problem can be found <a href="https://leetcode.com/problems/container-with-most-water/" target="_blank">here</a>.</p>
-		<p>Given <em>n</em> non-negative integers <code>a<sub>1</sub>, a<sub>2</sub>, ..., a<sub>n</sub></code>, where each represents a point at coordinate <code>(i, ai)</code>. <em>n</em> vertical lines are drawn such that the two endpoints of the line i is at <code>(i, ai)</code> and <code>(i, 0)</code>. Find two lines, which, together with the x-axis forms a container, such that the container contains the most water.</p>
-		<img src="/media/container_problem.jpg"/>
-		<p>The canonical solution has <em>O(n<sup>2</sup>)</em> time complexity, which is too slow.</p>
-		<pre><code class="lang-python">
-def maxArea(self, height: list[int]) -&gt; int:
-    areas = []
-    for i in range(len(height)):
-        for j in range(i+1, len(height)):
-            areas.append(self.get_area((i,height[i]),(j,height[j])))
-    return max(areas)
-def get_area(self, point1, point2):
-    return abs(point1[0] - point2[0]) * min(point1[1], point2[1])
-		</code></pre>
-		<p>A more clever solution is required - one that can achieve <em>O(n)</em> time complexity.  The key idea is to start at the ends of the array and work your way inwards on the side with the shorter height.</p>
-		<pre><code class="lang-python">
-def maxArea(self, height: list[int]) -&gt; int:
-    record = 0
-    l, r = 0, len(height) - 1
-    right = len(height) - 1
-    for width in range(r, 0, -1):
-        if height[l] &lt; height[r]:
-            record = max(record, width * height[l])
-            l += 1
-        else:
-            record = max(record, width * height[r])
-            r -= 1
-    return record
-		</code></pre>
-	</div>
-	<!-- endpost -->
-	<!-- post -->
-	<div class="blog-post">
 		<h3>Algorithmic idea: finding the sum of k terms</h3>
 		<p class="date-time">July 6, 2021</p>
 		<p>Another interesting subset of problems I've found on leetcode is arount finding <em>k</em> distict elements in an array that sum to a particular target value.</p>
