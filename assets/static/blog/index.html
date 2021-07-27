@@ -38,11 +38,51 @@
 		<p class="date-time">July 26, 2021</p>
 		<p>This is another interesting problem that I think ties in many of the core concepts of linked list algorithms.  The challenge is to reverse a linked list in groups of <em>k</em>.  For example, if <em>k</em> is 4, then <code>1 &rarr; 2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6 &rarr; 7 &rarr; 8 &rarr; 9</code> becomes <code>4 &rarr; 3 &rarr; 2 &rarr; 1 &rarr; 8 &rarr; 7 &rarr; 6 &rarr; 5 &rarr; 9</code>.</p>
 		<p>Linked list problems like these can typically be solved recursively and iteratively, so I'll show both here.</p>
+		<p>The problem is really two problems rolled into one: reversing the <em>k</em> group and linking the <em>k</em> groups together.  Both the iterative and recursive solution handle the first problem iteratively, so it's helpful to review the standard linked list iterative reversal structure:</p>
 		<pre><code class="lang-python">
-# W.I.P.
-def kgroup():
-    pass
+def rev_ll_iter(head):
+    curr, prev = head, None
+    while curr:
+        curr.next, curr, prev = prev, curr.next, curr
+    return prev
 		</code></pre>
+		<p>With this in place, I find the recursive solution to be more straightforward.</p>
+		<pre><code class="lang-python">
+def reverse_k_group_rec():
+    curr = head
+    # check if next group is at least length k
+    for _ in range(k):
+        if not curr:
+            return head
+        curr = curr.next
+    curr, prev = head, reverse_k_group_rec(curr, k)
+    for _ in range(k):
+        curr.next, curr, prev = prev, curr.next, curr
+    return prev
+		</code></pre>
+		<p>The iterative solution makes use of a dummy node and l/r pointers to connect the <em>k</em> groups.</p>
+		<pre><code class="lang-python">
+def reverse_k_group_iter():
+    dummy = n = Node()
+    l = r = head
+    while True:
+        count = 0
+        while r and count &lt; k:
+            r = r.next
+            count += 1
+        if count == k:
+            curr, prev = l, r
+            # reverse the k group
+            for _ in range(k):
+                curr.next, curr, prev = prev, curr.next, curr
+            # attach the previous end to the new start
+            # set the new end
+            # move l to the start of the next k group
+            n.next, n, l = prev, l, r
+        else:
+            return dummy.next
+		</code></pre>
+		<p>The key with this solution is that the <em>n</em> pointer keeps track of the ends of newly reversed groups, such that when the next group is reversed, <code>n.next</code> can be attached to the new start.  Note that the first instance of <code>curr.next = prev</code> during the <em>k</em> group reversal is overridden by this step.  Setting <code>prev = r</code> before the reversal is necessary, however, since the group linkage step is skipped if there aren't enough nodes at the end to make another group.</p>
 	</div>
 	<!-- endpost -->
 	<!-- post -->
